@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Руслан & Эльвина | 26.04.2026</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+    background: linear-gradient(-45deg, #f3c5d7, #d6c3f9, #ffd6a5, #c3f0ff);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+.section {
+    min-height: 100vh;
+    padding: 60px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.names {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    text-shadow: 0 0 20px rgba(255,255,255,0.6);
+    animation: fadeUp 2s ease forwards;
+    opacity: 0;
+}
+
+.date {
+    margin-top: 25px;
+    font-size: 18px;
+    letter-spacing: 3px;
+    opacity: 0;
+    animation: fadeIn 2s forwards 1s;
+}
+
+.button {
+    margin-top: 40px;
+    padding: 14px 35px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    font-size: 14px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.button:hover {
+    background: white;
+    color: #333;
+}
+
+.fade {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 1.2s ease;
+}
+
+.fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.text-block {
+    max-width: 500px;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.location {
+    margin-top: 40px;
+    font-size: 18px;
+}
+
+.map-btn {
+    margin-top: 20px;
+    padding: 12px 30px;
+    border: none;
+    background: white;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 2px;
+    transition: 0.4s;
+}
+
+.map-btn:hover {
+    background: #333;
+    color: white;
+}
+
+.timer {
+    margin-top: 40px;
+    display: flex;
+    gap: 15px;
+}
+
+.time-box {
+    padding: 15px;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    min-width: 80px;
+}
+
+.time-box span {
+    display: block;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.music-btn {
+    position: fixed;
