@@ -5,73 +5,307 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Руслан & Эльвина | 26.04.2026</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- SEO / Preview -->
+<meta property="og:title" content="Руслан & Эльвина">
+<meta property="og:description" content="Приглашение на свадьбу 26.04.2026">
+<meta property="og:image" content="preview.jpg">
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-    font-family: 'Montserrat', sans-serif;
-    color: white;
-    text-align: center;
-    overflow-x: hidden;
-    background: linear-gradient(-45deg, #f3c5d7, #d6c3f9, #ffd6a5, #c3f0ff);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+html, html {
+    background: radial-gradient(circle at center, #f2ebe3 0%, #e6ddd3 40%, #d9cfc2 70%, #cfc4b8 100%);
 }
 
-@keyframes gradientBG {
-    0% {background-position:0% 50%;}
-    50% {background-position:100% 50%;}
-    100% {background-position:0% 50%;}
+body { margin:0; padding:0; }
+* { box-sizing:border-box; }
+
+body {
+    font-family: 'Cormorant Garamond', serif;
+    color: #6b5b4d;
+    text-align: center;
+    overflow-x: hidden;
+
+    background: radial-gradient(circle at center, #f2ebe3 0%, #e6ddd3 40%, #d9cfc2 70%, #cfc4b8 100%);
+    background-size: 400% 400%;
+    animation: zoomIn 1.2s ease;
+
+    position: relative;
+}
+
+/* дополнительный слой для "живости" */
+body::before {
+    content:"";
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: radial-gradient(circle at 20% 30%, rgba(201,169,106,0.12), transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(201,169,106,0.1), transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255,240,220,0.2), transparent 60%);
+    animation: floatBg 25s ease-in-out infinite;
+    z-index:0;
+    pointer-events:none;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(1.05); opacity:0; }
+    to { transform: scale(1); opacity:1; }
+}
+
+@keyframes btnFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes goldFlow {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Золотой акцент */
+.gold { color: #c9a96a; }
+
+/* Золотой акцент */
+.gold { color: #c9a96a; }
+
+/* Частицы */
+#particles {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:0;
+    filter: blur(0.8px);
+    opacity:0.8;
 }
 
 .section {
+    position: relative;
+    z-index: 1;
     min-height: 100vh;
-    padding: 60px 25px;
+    padding: 90px 20px 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow:hidden;
+    background: transparent; /* обрезаем лишнее */
 }
 
 .names {
+    position: relative;
+    z-index: 3;
     font-family: 'Playfair Display', serif;
-    font-size: 44px;
-    letter-spacing: 4px;
-    line-height: 1.4;
-    text-shadow: 0 0 20px rgba(255,255,255,0.6);
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeUp 2s ease forwards;
+    font-size: 56px;
+    letter-spacing: 8px;
+    line-height: 1.3;
+    background: linear-gradient(90deg, #bfa37a, #fff6e8, #bfa37a);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: goldFlow 12s linear infinite;
+    display: inline-block;
+    padding: 24px 36px;
+}
+.names div { display:block; }
+.names div { display:block; }
+
+/* анимированные дуги (не круги) */
+.arc {
+    position:absolute;
+    width:320px;
+    height:320px;
+    z-index:2;
+    pointer-events:none;
+    opacity:0.9;
+    transform: scale(1.08);
+}
+}
+.arc svg{ width:100%; height:100%; }
+.arc path{
+    fill:none;
+    stroke:url(#goldGrad);
+    stroke-width:0.8; /* тоньше */
+    stroke-linecap:round;
+    stroke-dasharray:300;
+    stroke-dashoffset:300;
+    opacity:0.9;
+    animation: growArc 8s ease-in-out infinite;
+}
+
+/* разные задержки для "живости" */
+.arc.tl path:nth-child(1){ animation-delay:0s; }
+.arc.tl path:nth-child(2){ animation-delay:0.4s; }
+.arc.tl path:nth-child(3){ animation-delay:0.8s; }
+
+.arc.tr path:nth-child(1){ animation-delay:0.6s; }
+.arc.tr path:nth-child(2){ animation-delay:1s; }
+.arc.tr path:nth-child(3){ animation-delay:1.4s; }
+
+.arc.bl path:nth-child(1){ animation-delay:1.2s; }
+.arc.bl path:nth-child(2){ animation-delay:1.6s; }
+.arc.bl path:nth-child(3){ animation-delay:2s; }
+
+.arc.br path:nth-child(1){ animation-delay:1.8s; }
+.arc.br path:nth-child(2){ animation-delay:2.2s; }
+.arc.br path:nth-child(3){ animation-delay:2.6s; }
+
+/* плавное появление и исчезновение веток */
+@keyframes growArc{
+    0%{ stroke-dashoffset:300; opacity:0; }
+    20%{ opacity:1; }
+    50%{ stroke-dashoffset:0; opacity:1; }
+    80%{ opacity:1; }
+    100%{ stroke-dashoffset:300; opacity:0; }
+}
+
+@keyframes flow{
+    0%{ stroke-dashoffset:0; }
+    100%{ stroke-dashoffset:-240; }
+}
+
+@keyframes drawArc{
+    to{ stroke-dashoffset:0; }
+}
+@keyframes shimmer{
+    0%{ opacity:0.6; }
+    50%{ opacity:1; }
+    100%{ opacity:0.6; }
+}
+
+.arc.tl{ top:-6px; left:10px; }
+.arc.tr{ top:-6px; right:10px; transform: scaleX(-1) scale(1.08); }
+.arc.bl{ bottom:-6px; left:10px; transform: scaleY(-1) scale(1.08); }
+.arc.br{ bottom:-6px; right:10px; transform: scale(-1,-1) scale(1.08); }
+
+.section.hero::before{
+    top:40px;
+    left:20px;
+    transform: rotate(35deg);
+}
+
+.section.hero::after{
+    bottom:40px;
+    right:20px;
+    transform: rotate(35deg);
+}
+
+
+
+@keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+
+
+
+
+
+@media (min-width:768px){ .names{ font-size:70px; } }
+@media (max-width:768px){
+    .arc{
+        width:200px;
+        height:200px;
+        opacity:0.45;
+    }
 }
 
 @keyframes fadeUp { to { opacity:1; transform:translateY(0);} }
 
 .date {
-    margin-top: 25px;
-    font-size: 18px;
-    letter-spacing: 3px;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeIn 2s forwards 1s;
+    position: relative;
+    z-index: 3;
+    margin-top: 14px;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color:#bfa37a;
+    text-transform: uppercase;
+}
+.date span{ display:inline-block; margin:0 2px; }
+
+.date::before,
+.date::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #c9a96a, transparent);
+    margin: 10px auto;
+    opacity: 0.6;
 }
 
 @keyframes fadeIn { to { opacity:1; transform:translateY(0);} }
 
 .button {
-    margin-top: 40px;
-    padding: 14px 35px;
-    border: 1px solid white;
-    background: transparent;
-    color: white;
+    position: relative;
+    z-index: 3;
+    margin-top: 24px;
+    padding: 16px 45px;
+    border: 1px solid #bfa37a;
+    background: linear-gradient(120deg, transparent, rgba(191,163,122,0.2), transparent);
+    background-size: 200% 200%;
+    animation: btnFlow 10s ease infinite;
+    color: #bfa37a;
     font-size: 14px;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     cursor: pointer;
     transition: 0.4s;
+    overflow: hidden;
+}
 }
 
-.button:hover { background: white; color: #333; }
+.button.expand {
+    animation: expandBtn 0.6s ease forwards;
+}
+
+@keyframes expandBtn {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(20); opacity:0; }
+}
+
+
+.button::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 100%;
+    background: rgba(201,169,106,0.15);
+    transition: width 0.4s ease;
+    z-index: -1;
+}
+
+.button:hover::after {
+    width: 100%;
+}
+
+.button:hover { 
+    color: #fff; 
+    box-shadow: 0 0 18px rgba(201,169,106,0.35);
+    transform: translateY(-3px) scale(1.02);
+}
+
+.button:hover { 
+    background: #c9a96a; 
+    color: #fff; 
+    box-shadow: 0 0 18px rgba(201,169,106,0.35);
+    transform: translateY(-2px);
+}
+
+
 
 .fade {
     opacity:0;
@@ -79,32 +313,59 @@ body {
     transition:1.2s ease;
 }
 
+.fade.visible:nth-child(1){ transition-delay:0.2s; }
+.fade.visible:nth-child(2){ transition-delay:0.4s; }
+.fade.visible:nth-child(3){ transition-delay:0.6s; }
+
+.fade.visible { opacity:1; transform:translateY(0); }
+
 .fade.visible { opacity:1; transform:translateY(0); }
 
 .text-block {
-    max-width: 500px;
-    font-size:18px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size:22px;
     line-height:1.7;
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: center;
+    color:#7a6a5c;
 }
 
-.location { margin-top:40px; font-size:18px; }
+.location { 
+    margin-top:18px; 
+    font-size:20px; 
+    font-family: 'Cormorant Garamond', serif;
+    color:#7a6a5c;
+}
 
 .map-btn {
-    margin-top:20px;
-    padding:12px 30px;
+    font-family: 'Cormorant Garamond', serif;
+    margin-top:10px;
+    padding:8px 18px;
     border:none;
-    background:white;
-    color:#333;
+    background: linear-gradient(120deg, #c9a96a, #e8d3a5, #c9a96a);
+    background-size: 200% 200%;
+    animation: btnFlow 6s ease infinite;
+    color:#fff;
     text-decoration:none;
-    font-size:14px;
-    letter-spacing:2px;
-    transition:0.4s;
+    font-size:12px;
+    letter-spacing:1px;
+    border-radius:6px;
+    transition:0.3s;
+}
 }
 
-.map-btn:hover { background:#333; color:white; }
+.map-btn:hover { 
+    background:#6ee7d8; 
+    color:#fff; 
+    box-shadow: 0 0 12px rgba(46,196,182,0.35);
+    transform: translateY(-2px);
+}
+
+
 
 .timer {
-    margin-top:40px;
+    margin-top:22px;
     display:flex;
     gap:15px;
     flex-wrap:wrap;
@@ -113,19 +374,173 @@ body {
 
 .time-box {
     padding:15px;
-    background: rgba(255,255,255,0.2);
+    background: rgba(201,169,106,0.08);
+    border:1px solid rgba(201,169,106,0.25);
     backdrop-filter: blur(10px);
     min-width:80px;
     border-radius:8px;
 }
 
-.time-box span { display:block; font-size:24px; font-weight:500; }
+.time-box span {
+    display:block;
+    font-size:24px;
+    font-weight:500;
+    perspective: 1000px;
+}
+
+/* Real split-flap */
+.flip-card {
+    position: relative;
+    width: 70px;
+    height: 80px;
+    perspective: 1200px;
+}
+
+.card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.upper, .lower, .flip-upper, .flip-lower {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 500;
+    background: rgba(201,169,106,0.08);
+    border: 1px solid rgba(201,169,106,0.25);
+}
+
+.upper {
+    top: 0;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+}
+
+.lower {
+    bottom: 0;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+}
+
+.flip-upper {
+    top: 0;
+    transform-origin: bottom;
+    backface-visibility: hidden;
+    z-index: 2;
+}
+
+.flip-lower {
+    bottom: 0;
+    transform-origin: top;
+    transform: rotateX(90deg);
+    backface-visibility: hidden;
+    z-index: 1;
+}
+
+.flip-upper.animate {
+    animation: flipUpper 0.6s ease forwards;
+}
+
+.flip-lower.animate {
+    animation: flipLower 0.6s ease forwards;
+}
+
+@keyframes flipUpper {
+    0% { transform: rotateX(0deg); }
+    100% { transform: rotateX(-90deg); box-shadow: 0 8px 12px rgba(0,0,0,0.4);} 
+}
+
+@keyframes flipLower {
+    0% { transform: rotateX(90deg); }
+    100% { transform: rotateX(0deg); box-shadow: 0 -8px 12px rgba(0,0,0,0.4);} 
+}
+
+.flip-top, .flip-bottom {
+    position:absolute;
+    left:0;
+    width:100%;
+    height:50%;
+    overflow:hidden;
+    background: rgba(201,169,106,0.08);
+    border:1px solid rgba(201,169,106,0.25);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    font-weight:500;
+}
+
+.flip-top {
+    top:0;
+    border-bottom:none;
+    border-radius:6px 6px 0 0;
+}
+
+.flip-bottom {
+    bottom:0;
+    border-top:none;
+    border-radius:0 0 6px 6px;
+}
+
+.flip-top.flip {
+    transform-origin: bottom;
+    animation: flipTop 0.6s ease forwards;
+    box-shadow: 0 8px 12px rgba(0,0,0,0.4);
+}
+
+.flip-bottom.flip {
+    transform-origin: top;
+    animation: flipBottom 0.6s ease forwards;
+    box-shadow: 0 -8px 12px rgba(0,0,0,0.4);
+}
+
+@keyframes flipTop {
+    0% { transform: rotateX(0deg); }
+    100% { transform: rotateX(-90deg); }
+}
+
+@keyframes flipBottom {
+    0% { transform: rotateX(90deg); }
+    100% { transform: rotateX(0deg); }
+}
+
+.flip-inner {
+    display:inline-block;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-inner.flip {
+    transform: rotateX(180deg);
+}
+
+.flip-front, .flip-back {
+    position:absolute;
+    width:100%;
+    backface-visibility: hidden;
+}
+
+.flip-back {
+    transform: rotateX(180deg);
+}
+.time-box span.flip {
+    transform: rotateX(90deg);
+    opacity:0;
+}
+.time-box span.pop { transform: scale(1.2); }
 
 .music-btn {
     position: fixed;
     top:20px;
     right:20px;
-    background: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.15);
     border:none;
     padding:10px 15px;
     cursor:pointer;
@@ -133,47 +548,260 @@ body {
     z-index:100;
 }
 
-@media (min-width:768px){ .names{ font-size:70px; } }
+.timer-caption {
+    margin-top: 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    line-height: 1.7;
+    letter-spacing: 0.5px;
+    color: #d6c3a5;
+    opacity: 0.85;
+}
+
+.signature {
+    margin-top:28px;
+    font-family: 'Playfair Display', serif;
+    font-size:28px;
+    letter-spacing:2px;
+    background: linear-gradient(90deg, #c9a96a, #fff3d6, #c9a96a);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: goldFlow 6s linear infinite;
+}
+
+.rsvp {
+    margin-top:50px;
+    font-size:16px;
+}
+
+
+/* glass card for info */
+#info {
+    max-width: 720px;
+    margin: 0 auto 40px;
+    background: rgba(240,235,228,0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(191,163,122,0.35);
+    border-radius: 22px;
+    box-shadow: 0 12px 34px rgba(0,0,0,0.12);
+    padding: 28px 20px 34px;
+}
+
+/* glass for hero (lighter) */
+.hero {
+    max-width: 720px;
+    margin: 0 auto 28px;
+    background: rgba(235,228,220,0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(191,163,122,0.2);
+    border-radius: 22px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.1);
+    padding: 28px 20px 34px;
+}
+
+/* soften overlay */
+div[style*="backdrop-filter: blur(1px)"]{
+    background: rgba(60,50,40,0.25) !important;
+}
 </style>
 </head>
 
 <body>
 
-<!-- Кнопка для фоновой музыки -->
-<button class="music-btn" onclick="toggleMusic()">♫</button>
-<audio id="bgMusic" loop>
-    <source src="music.mp3" type="audio/mpeg">
-</audio>
+<!-- particles removed for Telegram optimization -->
 
-<!-- Первый экран -->
-<div class="section">
-    <div class="names">РУСЛАН<br>&<br>ЭЛЬВИНА</div>
-    <div class="date">26 АПРЕЛЯ 2026</div>
-    <button class="button" onclick="document.querySelector('#info').scrollIntoView({behavior:'smooth'})">ОТКРЫТЬ ПРИГЛАШЕНИЕ</button>
+
+
+<!-- music removed for Telegram optimization -->
+
+<div class="section hero">
+    <div class="arc tl">
+        <svg viewBox="0 0 320 320">
+            <defs>
+                <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#fff3d6"/>
+                    <stop offset="50%" stop-color="#c9a96a"/>
+                    <stop offset="100%" stop-color="#e8d3a5"/>
+                </linearGradient>
+            </defs>
+            <!-- базовые ветки с усиленной волной -->
+            <path d="M20 310 C35 270, 5 230, 30 190 C10 150, 60 90, 100 60 L300 60" />
+            <path d="M32 310 C48 265, 18 225, 44 185 C28 145, 78 92, 118 80 L280 70" opacity="0.8" />
+            <path d="M44 310 C60 260, 30 220, 56 180 C40 140, 90 95, 130 90 L260 90" opacity="0.7" />
+            <path d="M56 305 C72 255, 42 215, 68 175 C52 135, 102 98, 142 100 L250 110" opacity="0.6" />
+
+            <!-- дополнительные ветки для переплетения -->
+            <path d="M26 310 C10 270, 40 230, 20 190 C38 150, 70 95, 110 70 L290 75" opacity="0.55" />
+            <path d="M38 310 C22 265, 52 225, 32 185 C50 145, 82 100, 122 85 L270 80" opacity="0.5" />
+            <path d="M50 305 C34 260, 64 220, 44 180 C62 140, 94 105, 134 95 L255 95" opacity="0.45" />
+        </svg>
+    </div>
+
+    <div class="arc tr">
+        <svg viewBox="0 0 320 320">
+            <path d="M20 310 C35 270, 5 230, 30 190 C10 150, 60 90, 100 60 L300 60" />
+            <path d="M32 310 C48 265, 18 225, 44 185 C28 145, 78 92, 118 80 L280 70" opacity="0.8" />
+            <path d="M44 310 C60 260, 30 220, 56 180 C40 140, 90 95, 130 90 L260 90" opacity="0.7" />
+            <path d="M56 305 C72 255, 42 215, 68 175 C52 135, 102 98, 142 100 L250 110" opacity="0.6" />
+            <path d="M26 310 C10 270, 40 230, 20 190 C38 150, 70 95, 110 70 L290 75" opacity="0.55" />
+            <path d="M38 310 C22 265, 52 225, 32 185 C50 145, 82 100, 122 85 L270 80" opacity="0.5" />
+            <path d="M50 305 C34 260, 64 220, 44 180 C62 140, 94 105, 134 95 L255 95" opacity="0.45" />
+        </svg>
+    </div>
+
+    <div class="arc bl">
+        <svg viewBox="0 0 320 320">
+            <path d="M20 310 C35 270, 5 230, 30 190 C10 150, 60 90, 100 60 L300 60" />
+            <path d="M32 310 C48 265, 18 225, 44 185 C28 145, 78 92, 118 80 L280 70" opacity="0.8" />
+            <path d="M44 310 C60 260, 30 220, 56 180 C40 140, 90 95, 130 90 L260 90" opacity="0.7" />
+            <path d="M56 305 C72 255, 42 215, 68 175 C52 135, 102 98, 142 100 L250 110" opacity="0.6" />
+            <path d="M26 310 C10 270, 40 230, 20 190 C38 150, 70 95, 110 70 L290 75" opacity="0.55" />
+            <path d="M38 310 C22 265, 52 225, 32 185 C50 145, 82 100, 122 85 L270 80" opacity="0.5" />
+            <path d="M50 305 C34 260, 64 220, 44 180 C62 140, 94 105, 134 95 L255 95" opacity="0.45" />
+        </svg>
+    </div>
+
+    <div class="arc br">
+        <svg viewBox="0 0 320 320">
+            <path d="M20 310 C35 270, 5 230, 30 190 C10 150, 60 90, 100 60 L300 60" />
+            <path d="M32 310 C48 265, 18 225, 44 185 C28 145, 78 92, 118 80 L280 70" opacity="0.8" />
+            <path d="M44 310 C60 260, 30 220, 56 180 C40 140, 90 95, 130 90 L260 90" opacity="0.7" />
+            <path d="M56 305 C72 255, 42 215, 68 175 C52 135, 102 98, 142 100 L250 110" opacity="0.6" />
+            <path d="M26 310 C10 270, 40 230, 20 190 C38 150, 70 95, 110 70 L290 75" opacity="0.55" />
+            <path d="M38 310 C22 265, 52 225, 32 185 C50 145, 82 100, 122 85 L270 80" opacity="0.5" />
+            <path d="M50 305 C34 260, 64 220, 44 180 C62 140, 94 105, 134 95 L255 95" opacity="0.45" />
+        </svg>
+    </div>
+
+    <div class="names" id="names">
+    РУСЛАН & ЭЛЬВИНА
+</div>
+    <div class="date" id="date">26 АПРЕЛЯ 2026</div>
+    <button class="button" id="openBtn" onclick="openInvite()">ОТКРЫТЬ ПРИГЛАШЕНИЕ</button>
 </div>
 
-<!-- Основной экран -->
 <div class="section fade" id="info">
-    <div class="text-block">
-        Мы решили связать наши судьбы и стать одной семьёй.<br>
+    <div class="text-block" style="font-family:'Playfair Display', serif; font-weight:500;">
+        Мы решили связать наши судьбы<br>
+        и стать одной семьёй.<br>
         Будем счастливы, если вы разделите с нами этот особенный день.
     </div>
 
-    <div class="location">
-        Ресторан OqSaroy<br>
-        г. Ангрен<br>
-        Начало в 17:00
+    <div style="margin-top:18px; font-size:19px; line-height:1.7; font-family: 'Playfair Display', serif; color:#7a6a5c; font-weight:500;">
+        Будем рады видеть вас заранее,<br>
+        чтобы вместе начать этот вечер вовремя<br><br>
+        Сбор гостей — 17:30<br>
+        Начало торжества — 18:00
     </div>
 
-    <a class="map-btn" href="https://www.google.com/maps?q=40.99947924868695,70.07479626158064" target="_blank">ОТКРЫТЬ ЛОКАЦИЮ</a>
+    <div class="timer-caption">
+        До нашего дня осталось совсем немного
+    </div>
 
     <div class="timer" id="timer"></div>
 
-    <div style="margin-top:60px; font-size:14px;">С любовью, Руслан & Эльвина</div>
+    <div style="margin-top:18px; font-size:14px; letter-spacing:3px; opacity:0.7;">ЛОКАЦИЯ</div>
+
+    <div class="location">
+        Банкетный зал "OQSAROY"<br>
+        г. Ангрен
+    </div>
+
+    <div style="margin-top:25px; display:flex; flex-direction:row; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap;">
+        <a class="map-btn" href="https://www.google.com/maps?q=40.99947924868695,70.07479626158064" target="_blank">
+            GOOGLE
+        </a>
+        <a class="map-btn" href="https://yandex.uz/maps/101550/angren/?ll=70.075106%2C40.999334&mode=search&sll=70.074796%2C40.999479&text=40.999479%2C70.074796&z=19.78" target="_blank">
+            ЯНДЕКС
+        </a>
+    </div>
+
+    
+
+    
+
+    <div class="signature">С любовью,<br>Руслан & Эльвина</div>
 </div>
 
 <script>
-// Анимация появления при скролле
+// === АНИМАЦИЯ ИМЕН (фикс для мобильных) ===
+document.addEventListener('DOMContentLoaded', ()=>{
+    const namesEl = document.getElementById('names');
+
+    if(!namesEl) return;
+
+    const lines = ["РУСЛАН","&","ЭЛЬВИНА"];
+    namesEl.innerHTML = '';
+
+    lines.forEach((line, lineIndex)=>{
+        const lineDiv = document.createElement('div');
+        const chars = [...line];
+
+        chars.forEach((char,i)=>{
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.style.opacity = 0;
+            span.style.display = 'inline-block';
+            span.style.filter = 'blur(6px)';
+            span.style.transition = '1.2s ease';
+            span.style.color = '#bfa37a'; // fallback чтобы не исчезало
+
+            lineDiv.appendChild(span);
+
+            let delay = (lineIndex === 0)
+                ? i * 120
+                : (lineIndex === 2)
+                    ? (chars.length - 1 - i) * 120
+                    : 300;
+
+            setTimeout(()=>{
+                span.style.opacity = 1;
+                span.style.filter = 'blur(0px)';
+            }, delay + 100);
+        });
+
+        namesEl.appendChild(lineDiv);
+    });
+});
+
+// === АНИМАЦИЯ ДАТЫ (медленнее + корректные пробелы) ===
+const dateEl = document.getElementById('date');
+const dateText = dateEl.innerText;
+dateEl.innerHTML = '';
+
+[...dateText].forEach((char, i) => {
+    const span = document.createElement('span');
+    if(char === ' '){
+        span.innerHTML = ' ';
+        span.style.margin = '0 6px';
+    } else {
+        span.textContent = char;
+    }
+    span.style.display = 'inline-block';
+    span.style.opacity = 0;
+    span.style.transform = 'translateY(-60px) rotate(220deg)';
+    span.style.transition = '1.2s cubic-bezier(0.22,1,0.36,1)';
+    dateEl.appendChild(span);
+
+    setTimeout(() => {
+        span.style.opacity = 1;
+        span.style.transform = 'translateY(0) rotate(0deg)';
+    }, 1200 + i * 140);
+});
+
+// === КНОПКА (позже и медленнее) ===
+const btn = document.getElementById('openBtn');
+btn.style.opacity = 0;
+btn.style.transform = 'translateY(30px)';
+setTimeout(()=>{
+    btn.style.transition = '1.2s ease';
+    btn.style.opacity = 1;
+    btn.style.transform = 'translateY(0)';
+}, 3000);
+
 const fadeElements = document.querySelectorAll('.fade');
 window.addEventListener('scroll', () => {
     fadeElements.forEach(el => {
@@ -182,28 +810,62 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Таймер обратного отсчёта
-const weddingDate = new Date("April 26, 2026 17:00:00").getTime();
+const weddingDate = new Date("April 26, 2026 18:00:00").getTime();
 const timer = document.getElementById("timer");
-setInterval(() => {
+
+function updateTimer(){
     const now = new Date().getTime();
     const distance = weddingDate - now;
+
     const days = Math.floor(distance / (1000*60*60*24));
     const hours = Math.floor((distance/(1000*60*60))%24);
     const minutes = Math.floor((distance/(1000*60))%60);
+
     timer.innerHTML = `
-        <div class="time-box"><span>${days}</span>дней</div>
-        <div class="time-box"><span>${hours}</span>часов</div>
-        <div class="time-box"><span>${minutes}</span>минут</div>
+        <div style="display:flex; gap:20px; align-items:center; justify-content:center; font-family:'Playfair Display', serif;">
+            <div style="text-align:center;">
+                <div style="font-size:36px; color:#c9a96a;">${days}</div>
+                <div style="font-size:12px; letter-spacing:2px; opacity:0.6;">ДНЕЙ</div>
+            </div>
+            <div style="opacity:0.4;">|</div>
+            <div style="text-align:center;">
+                <div style="font-size:36px; color:#c9a96a;">${hours}</div>
+                <div style="font-size:12px; letter-spacing:2px; opacity:0.6;">ЧАСОВ</div>
+            </div>
+            <div style="opacity:0.4;">|</div>
+            <div style="text-align:center;">
+                <div style="font-size:36px; color:#c9a96a;">${minutes}</div>
+                <div style="font-size:12px; letter-spacing:2px; opacity:0.6;">МИНУТ</div>
+            </div>
+        </div>
     `;
-},1000);
+}
 
-// Фоновая музыка
+updateTimer();
+setInterval(updateTimer,1000);
+
 const music = document.getElementById("bgMusic");
-function toggleMusic(){ music.paused ? music.play() : music.pause(); }
+function openInvite(){
+    const btn = document.getElementById('openBtn');
+    btn.classList.add('expand');
+    setTimeout(()=>{
+        document.querySelector('#info').scrollIntoView({behavior:'smooth'});
+        btn.style.display = 'none';
+    },400);
+}
 
-// Авто-включение при первом клике (iOS)
+function toggleMusic(){ 
+    if(music.paused){ 
+        music.play(); 
+        document.getElementById('musicBtn').innerText = '❚❚';
+    } else { 
+        music.pause(); 
+        document.getElementById('musicBtn').innerText = '▶';
+    }
+}
 window.addEventListener('click', ()=>{ music.play().catch(()=>{}); }, {once:true});
+// частицы
+// particles removed for performance (Telegram friendly)
 </script>
 
 </body>
