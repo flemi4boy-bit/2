@@ -1,3 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Руслан & Эльвина</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at 20% 20%, #fdfaf6, #e7ded5);
+  overflow: hidden;
+}
+
+.wrapper {
+  width: 100%;
+  height: 200vh;
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.screen {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  width: 92%;
+  max-width: 380px;
+  height: 640px;
+
+  backdrop-filter: blur(25px) saturate(140%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.15));
+
+  border-radius: 32px;
+  border: 1px solid rgba(255,255,255,0.4);
+
+  box-shadow: 0 25px 70px rgba(0,0,0,0.18);
+
+  padding: 48px 28px 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.top { display: flex; flex-direction: column; gap: 18px; }
+.center { display: flex; flex-direction: column; gap: 14px; }
+.bottom { display: flex; flex-direction: column; gap: 14px; padding-top: 10px; }
+
+.names {
+  font-family: 'Playfair Display', serif;
+  font-size: 46px;
+  letter-spacing: 5px;
+  line-height: 1.25;
+}
+
+.date {
+  font-size: 24px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeDate 1.2s ease forwards;
+  animation-delay: 0.8s;
+}
+
+@keyframes fadeDate {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.center div {
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+.timer {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.button {
+  padding: 14px;
+  border-radius: 24px;
+  border: none;
+  background: linear-gradient(135deg, #d6b98c, #f3e2c7);
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.link {
+  font-size: 15px;
+  text-decoration: none;
+  color: #333;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper" id="wrapper">
+
+  <!-- экран 1 -->
+  <div class="screen">
+    <div class="content">
+
+      <div class="top">
+        <div class="names">РУСЛАН<br>&<br>ЭЛЬВИНА</div>
+      </div>
+
+      <div class="center">
+        <div class="date">26 апреля 2026</div>
+      </div>
+
+      <div class="bottom">
+        <button class="button" onclick="openInvite()">Открыть приглашение</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- экран 2 -->
+  <div class="screen">
+    <div class="content">
+
+      <div class="top">
+        <div class="names">РУСЛАН & ЭЛЬВИНА</div>
+        <div id="guestName"></div>
+      </div>
+
+      <div class="center">
+        <div>
+          С большой радостью приглашаем вас разделить с нами день нашей свадьбы.
+          Этот день станет особенным для нас, и нам будет очень приятно видеть вас рядом.
+        </div>
+
+        <div><b>26 апреля 2026</b></div>
+
+        <div>Сбор гостей: 17:30</div>
+        <div>Начало торжества: 18:00</div>
+
+        <div>г. Ангрен</div>
+
+        <div class="timer" id="timer"></div>
+      </div>
+
+      <div class="bottom">
+        <a class="link" href="https://yandex.uz/maps/101550/angren/?ll=70.075106%2C40.999334&mode=search&sll=70.074796%2C40.999479&text=40.999479%2C70.074796&z=19">Яндекс Карты</a>
+        <a class="link" href="https://www.google.com/maps/place/40%C2%B059'58.1%22N+70%C2%B004'29.3%22E/@40.9994792,70.0722214,17z/data=!3m1!4b1!4m4!3m3!8m2!3d40.9994792!4d70.0747963">Google Maps</a>
+
+        <button class="button" onclick="closeInvite()">Назад</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
 <script>
 // ===== имя + пол =====
 const params = new URLSearchParams(window.location.search);
@@ -7,31 +173,15 @@ let gender = params.get("gender");
 if (!fullName) {
   document.getElementById("guestName").innerText = "Дорогой гость!";
 } else {
-
   let firstName = fullName.split(" ")[0].toLowerCase();
 
-  // база имен (расширь при необходимости)
-  const femaleNames = [
-    "анна","мария","эльвина","айгуль","диана","алина","карина","мадина",
-    "сабина","лилия","наиля","зара","камилла","фатима","гульнара",
-    "шахноза","нигора","феруза","дильноза","умеда"
-  ];
+  const femaleNames = ["анна","мария","эльвина","айгуль","диана","алина","карина","мадина","сабина","лилия","наиля","зара","камилла","фатима"];
+  const maleNames = ["руслан","азиз","бекзод","али","тимур","ислам","сарвар","жасур","шохрух","абдулла","илхом","акмал"];
 
-  const maleNames = [
-    "руслан","азиз","бекзод","али","тимур","ислам","сарвар","жасур",
-    "шохрух","абдулла","илхом","акмал","санжар","бахром","умид","фаррух"
-  ];
-
-  // если не передан gender — определяем
   if (!gender) {
-    if (femaleNames.includes(firstName)) {
-      gender = "female";
-    } else if (maleNames.includes(firstName)) {
-      gender = "male";
-    } else {
-      // fallback
-      gender = firstName.endsWith("а") ? "female" : "male";
-    }
+    if (femaleNames.includes(firstName)) gender = "female";
+    else if (maleNames.includes(firstName)) gender = "male";
+    else gender = firstName.endsWith("а") ? "female" : "male";
   }
 
   const prefix = gender === "female" ? "Дорогая" : "Дорогой";
@@ -40,7 +190,7 @@ if (!fullName) {
     `${prefix} ${fullName}!`;
 }
 
-// ===== переход =====
+// переход
 function openInvite() {
   document.getElementById("wrapper").style.transform = "translateY(-100vh)";
 }
@@ -48,7 +198,7 @@ function closeInvite() {
   document.getElementById("wrapper").style.transform = "translateY(0)";
 }
 
-// ===== таймер =====
+// таймер
 const weddingDate = new Date("2026-04-26T17:30:00").getTime();
 const timerEl = document.getElementById("timer");
 
@@ -67,3 +217,6 @@ setInterval(() => {
   timerEl.innerText = `До свадьбы: ${days} дней ${hours} часов`;
 }, 1000);
 </script>
+
+</body>
+</html>
