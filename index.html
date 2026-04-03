@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head
-<!-- Open Graph (Telegram / WhatsApp / etc.) -->
-<meta property="og:title" content="Свадьба Руслана и Эльвины">
-<meta property="og:description" content="Приглашение на торжество • 26 апреля 2026 • г. Ангрен">
-<meta property="og:image" content="https://flemi4boy-bit.github.io/2/preview.jpg">
-<meta property="og:url" content="https://flemi4boy-bit.github.io/2">
-<meta property="og:type" content="website">
-
-<!-- Twitter (Telegram тоже использует) -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Свадьба Руслана и Эльвины">
-<meta name="twitter:description" content="Приглашение на торжество • 26 апреля 2026 • г. Ангрен">
-<meta name="twitter:image" content="https://flemi4boy-bit.github.io/2/preview.jpg">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Руслан & Эльвина</title>
+
+<!-- Open Graph -->
+<meta property="og:title" content="Свадьба Руслана и Эльвины">
+<meta property="og:description" content="Приглашение на торжество • 26 апреля 2026 • г. Ангрен">
+<meta property="og:image" content="https://USERNAME.github.io/REPO/preview.jpg">
+<meta property="og:url" content="https://USERNAME.github.io/REPO/">
+<meta property="og:type" content="website">
+
+<meta name="twitter:card" content="summary_large_image">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
@@ -123,7 +120,6 @@ body {
   <!-- экран 1 -->
   <div class="screen">
     <div class="content">
-
       <div class="top">
         <div class="names">РУСЛАН<br>&<br>ЭЛЬВИНА</div>
       </div>
@@ -135,7 +131,6 @@ body {
       <div class="bottom">
         <button class="button" onclick="openInvite()">Открыть приглашение</button>
       </div>
-
     </div>
   </div>
 
@@ -177,29 +172,40 @@ body {
 </div>
 
 <script>
-// ===== имя + пол =====
+// ===== имя + пары =====
 const params = new URLSearchParams(window.location.search);
 let fullName = params.get("name");
 let gender = params.get("gender");
 
+const guestEl = document.getElementById("guestName");
+
 if (!fullName) {
-  document.getElementById("guestName").innerText = "Дорогой гость!";
+  guestEl.innerText = "Дорогой гость!";
 } else {
-  let firstName = fullName.split(" ")[0].toLowerCase();
 
-  const femaleNames = ["анна","мария","эльвина","айгуль","диана","алина","карина","мадина","сабина","лилия","наиля","зара","камилла","фатима"];
-  const maleNames = ["руслан","азиз","бекзод","али","тимур","ислам","сарвар","жасур","шохрух","абдулла","илхом","акмал"];
+  fullName = decodeURIComponent(fullName);
+  const names = fullName.trim().split(/\s+/);
 
-  if (!gender) {
-    if (femaleNames.includes(firstName)) gender = "female";
-    else if (maleNames.includes(firstName)) gender = "male";
-    else gender = firstName.endsWith("а") ? "female" : "male";
+  // если пара
+  if (names.length >= 2) {
+    const formatted = names.join(" и ");
+    guestEl.innerText = `Дорогие ${formatted}!`;
+  } else {
+
+    let firstName = names[0].toLowerCase();
+
+    const femaleNames = ["анна","мария","эльвина","айгуль","диана","алина","карина","мадина","сабина","лилия"];
+    const maleNames = ["руслан","азиз","бекзод","али","тимур","ислам","сарвар","жасур"];
+
+    if (!gender) {
+      if (femaleNames.includes(firstName)) gender = "female";
+      else if (maleNames.includes(firstName)) gender = "male";
+      else gender = firstName.endsWith("а") ? "female" : "male";
+    }
+
+    const prefix = gender === "female" ? "Дорогая" : "Дорогой";
+    guestEl.innerText = `${prefix} ${fullName}!`;
   }
-
-  const prefix = gender === "female" ? "Дорогая" : "Дорогой";
-
-  document.getElementById("guestName").innerText =
-    `${prefix} ${fullName}!`;
 }
 
 // переход
