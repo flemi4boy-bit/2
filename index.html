@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Руслан & Эльвина</title>
 
+<!-- Open Graph -->
 <meta property="og:title" content="Свадьба Руслана и Эльвины">
 <meta property="og:description" content="Приглашение на торжество • 26 апреля 2026 • г. Ангрен">
 <meta property="og:image" content="https://USERNAME.github.io/REPO/preview.jpg">
@@ -17,24 +18,36 @@ body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   background: radial-gradient(circle at 20% 20%, #fdfaf6, #e7ded5);
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
+/* контейнер */
 .wrapper {
+  position: relative;
   width: 100%;
-  height: 200vh;
-  will-change: transform;
+  height: 100vh;
+  overflow: hidden;
 }
 
+/* экраны */
 .screen {
-  min-height: 100vh;
+  position: absolute;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px 0;
+
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.screen1 { transform: translateY(0); }
+.screen2 { transform: translateY(100%); }
+
+.wrapper.open .screen1 { transform: translateY(-100%); }
+.wrapper.open .screen2 { transform: translateY(0); }
+
+/* карточка */
 .content {
   width: 92%;
   max-width: 380px;
@@ -59,11 +72,12 @@ body {
 
 .names {
   font-family: 'Playfair Display', serif;
-  font-size: 46px;
+  font-size: 44px;
+  line-height: 1.2;
 }
 
 .date {
-  font-size: 24px;
+  font-size: 22px;
   opacity: 0;
   transform: translateY(20px);
   animation: fade 1.2s forwards;
@@ -80,12 +94,18 @@ body {
   border: none;
   background: linear-gradient(135deg, #d6b98c, #f3e2c7);
   cursor: pointer;
+  font-size: 15px;
 }
 
-.timer { margin-top:10px; }
+.link {
+  font-size: 15px;
+  text-decoration: none;
+  color: #333;
+}
 
-@media (max-height:700px){
-  .content{transform:scale(.9);}
+.timer {
+  margin-top: 10px;
+  font-size: 17px;
 }
 </style>
 </head>
@@ -94,91 +114,108 @@ body {
 
 <div class="wrapper" id="wrapper">
 
-<div class="screen">
-<div class="content">
-<div class="names">РУСЛАН<br>&<br>ЭЛЬВИНА</div>
-<div class="date">26 апреля 2026</div>
-<button class="button" onclick="openInvite()">Открыть приглашение</button>
-</div>
-</div>
+  <!-- экран 1 -->
+  <div class="screen screen1">
+    <div class="content">
+      <div class="names">РУСЛАН<br>&<br>ЭЛЬВИНА</div>
+      <div class="date">26 апреля 2026</div>
+      <button class="button" onclick="openInvite()">Открыть приглашение</button>
+    </div>
+  </div>
 
-<div class="screen">
-<div class="content">
-<div class="names">РУСЛАН & ЭЛЬВИНА</div>
-<div id="guestName"></div>
+  <!-- экран 2 -->
+  <div class="screen screen2">
+    <div class="content">
 
-<div>
-С большой радостью приглашаем вас разделить с нами день нашей свадьбы.
-</div>
+      <div class="names">РУСЛАН & ЭЛЬВИНА</div>
+      <div id="guestName"></div>
 
-<div><b>26 апреля 2026</b></div>
-<div>Сбор гостей: 17:30</div>
-<div>Начало: 18:00</div>
-<div>г. Ангрен</div>
+      <div>
+        С большой радостью приглашаем вас разделить с нами день нашей свадьбы.
+      </div>
 
-<div class="timer" id="timer"></div>
+      <div><b>26 апреля 2026</b></div>
+      <div>Сбор гостей: 17:30</div>
+      <div>Начало: 18:00</div>
+      <div>г. Ангрен</div>
 
-<button class="button" onclick="closeInvite()">Назад</button>
-</div>
-</div>
+      <div class="timer" id="timer"></div>
+
+      <a class="link" href="https://yandex.uz/maps/101550/angren/?ll=70.075106%2C40.999334&z=19">Яндекс Карты</a>
+      <a class="link" href="https://www.google.com/maps/place/40.9994792,70.0747963">Google Maps</a>
+
+      <button class="button" onclick="closeInvite()">Назад</button>
+
+    </div>
+  </div>
 
 </div>
 
 <script>
+// ===== переключение =====
+const wrapper = document.getElementById("wrapper");
+
+function openInvite() {
+  wrapper.classList.add("open");
+}
+function closeInvite() {
+  wrapper.classList.remove("open");
+}
+
 // ===== свайп =====
-let startY=0, current=0;
-const wrapper=document.getElementById("wrapper");
+let startY = 0;
 
-document.addEventListener("touchstart",e=>{
-  startY=e.touches[0].clientY;
+document.addEventListener("touchstart", e => {
+  startY = e.touches[0].clientY;
 });
 
-document.addEventListener("touchmove",e=>{
-  let diff=e.touches[0].clientY-startY;
-  current=Math.max(Math.min(diff,0),-window.innerHeight);
-  wrapper.style.transform=`translateY(${current}px)`;
-});
+document.addEventListener("touchend", e => {
+  let diff = e.changedTouches[0].clientY - startY;
 
-document.addEventListener("touchend",()=>{
-  if(current<-window.innerHeight/3){
-    openInvite();
-  }else{
-    closeInvite();
-  }
+  if (diff < -50) openInvite();
+  if (diff > 50) closeInvite();
 });
-
-// ===== кнопки =====
-function openInvite(){
-  wrapper.style.transform=`translateY(-${window.innerHeight}px)`;
-}
-function closeInvite(){
-  wrapper.style.transform=`translateY(0)`;
-}
 
 // ===== имя =====
-const params=new URLSearchParams(window.location.search);
-let full=params.get("name");
-const el=document.getElementById("guestName");
+const params = new URLSearchParams(window.location.search);
+let full = params.get("name");
 
-if(full){
-  full=decodeURIComponent(full);
-  const parts=full.split(" ");
-  el.innerText=parts.length>1
-    ? `Дорогие ${parts.join(" и ")}!`
-    : `Дорогой ${full}!`;
-}else{
-  el.innerText="Дорогой гость!";
+const el = document.getElementById("guestName");
+
+if (full) {
+  full = decodeURIComponent(full);
+  const parts = full.trim().split(/\s+/);
+
+  if (parts.length >= 2) {
+    el.innerText = `Дорогие ${parts.join(" и ")}!`;
+  } else {
+    const name = parts[0].toLowerCase();
+    const female = ["анна","мария","эльвина","алина","диана"];
+    const isFemale = female.includes(name) || name.endsWith("а");
+
+    el.innerText = `${isFemale ? "Дорогая" : "Дорогой"} ${full}!`;
+  }
+} else {
+  el.innerText = "Дорогой гость!";
 }
 
 // ===== таймер =====
-const end=new Date("2026-04-26T17:30:00").getTime();
-setInterval(()=>{
-  let d=end-Date.now();
-  let days=Math.floor(d/86400000);
-  let hours=Math.floor(d/3600000)%24;
-  document.getElementById("timer").innerText=
-    `До свадьбы: ${days} дней ${hours} часов`;
-},1000);
+const end = new Date("2026-04-26T17:30:00").getTime();
+
+setInterval(() => {
+  let diff = end - Date.now();
+
+  if (diff <= 0) {
+    document.getElementById("timer").innerText = "Сегодня день свадьбы";
+    return;
+  }
+
+  let d = Math.floor(diff / 86400000);
+  let h = Math.floor(diff / 3600000) % 24;
+
+  document.getElementById("timer").innerText =
+    `До свадьбы: ${d} дней ${h} часов`;
+}, 1000);
 </script>
 
 </body>
