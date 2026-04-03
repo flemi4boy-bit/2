@@ -1,182 +1,254 @@
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Руслан & Эльвина</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-    html {
-        background: radial-gradient(circle at center, #f2ebe3, #e6ddd3, #d9cfc2, #cfc4b8);
-    }
-    body {
-        margin: 0;
-        font-family: 'Cormorant Garamond', serif;
-        color: #6b5b4d;
-        text-align: center;
-        overflow-x: hidden;
-        position: relative;
-        background: inherit;
-    }
-    /* Фоновая анимация света */
-    body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background:
-            radial-gradient(circle at 30% 30%, rgba(255,240,220,0.4), transparent 60%),
-            radial-gradient(circle at 70% 70%, rgba(201,169,106,0.25), transparent 60%);
-        animation: floatBg 18s ease-in-out infinite;
-        z-index: 0;
-        pointer-events: none;
-    }
-    @keyframes floatBg { 50% { transform: translateY(-20px); } }
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at 20% 20%, #fdfaf6, #e7ded5);
+  overflow: hidden;
+}
 
-    /* Контейнеры */
-    .section {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        position: relative;
-        z-index: 1;
-    }
-    /* Glass effect for hero and info */
-    .section.hero, #info {
-        background: rgba(255,255,255,0.25);
-        backdrop-filter: blur(14px);
-        border: 1px solid rgba(255,255,255,0.4);
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.6), 0 0 30px rgba(201,169,106,0.15);
-        width: 100%;
-        max-width: 480px;
-        margin: 20px auto;
-        padding: 28px 20px;
-    }
+/* мягкое свечение */
+body::before, body::after {
+  content: "";
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,215,160,0.25), transparent 70%);
+  filter: blur(80px);
+  z-index: 0;
+}
 
-    /* Arc decorations */
-    .arc {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.4;
-        z-index: 2;
-    }
-    .arc svg { width: 100%; height: 100%; }
-    .arc path { fill: none; stroke: rgba(201,169,106,0.6); stroke-width: 2; }
+body::before { top: -100px; left: -100px; }
+body::after { bottom: -100px; right: -100px; }
 
-    /* Имена */
-    .names {
-        font-family: 'Playfair Display', serif;
-        font-size: 34px;
-        letter-spacing: 4px;
-        background: linear-gradient(90deg, #bfa37a, #fff6e8, #bfa37a);
-        background-size: 200%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: gold 10s linear infinite;
-        /* FIX: static blur for names */
-        filter: blur(0.3px);
-        /* soft glow */
-        text-shadow: 0 0 10px rgba(201,169,106,0.3);
-        z-index: 3;
-    }
-    @keyframes gold { to { background-position: 200%; } }
+/* частицы */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
 
-    .date {
-        margin-top: 10px;
-        font-size: 16px;
-        letter-spacing: 2px;
-        color: #bfa37a;
-    }
-    .button {
-        margin-top: 18px;
-        padding: 12px 30px;
-        border: 1px solid #bfa37a;
-        background: transparent;
-        color: #bfa37a;
-        border-radius: 6px;
-        cursor: pointer;
-    }
-    .button:focus { outline: 2px solid #c9a96a; }
+/* экран */
+.screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  transition: 1s;
+}
 
-    /* Fade-in on scroll */
-    .fade {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: 0.8s;
-    }
-    .fade.visible {
-        opacity: 1;
-        transform: none;
-    }
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(30px);
+}
 
-    /* Текст */
-    .text-block {
-        font-size: 18px;
-        line-height: 1.6;
-        color: #7a6a5c;
-    }
-    .location {
-        margin-top: 18px;
-        font-size: 16px;
-        color: #7a6a5c;
-    }
-    /* Map buttons */
-    .map-btn {
-        display: inline-block;
-        margin: 6px 4px;
-        padding: 8px 14px;
-        background: #c9a96a;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 6px;
-        font-size: 12px;
-    }
+/* СТЕКЛЯННАЯ КАРТОЧКА */
+.content {
+  backdrop-filter: blur(25px) saturate(140%);
+  -webkit-backdrop-filter: blur(25px) saturate(140%);
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.35),
+    rgba(255,255,255,0.15)
+  );
+  border-radius: 28px;
+  padding: 45px 30px;
+  width: 320px;
 
-    /* Flip timer */
-    .timer {
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-        gap: 12px;
-    }
-    .time-block {
-        text-align: center;
-    }
-    .time-block span {
-        display: block;
-        margin-top: 6px;
-        font-size: 10px;
-        letter-spacing: 2px;
-        color: #bfa37a;
-    }
-    .flip {
-        position: relative;
-        width: 60px;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 28px;
-        font-family: 'Playfair Display', serif;
-        color: #c9a96a;
-        background: rgba(255,255,255,0.15);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(201,169,106,0.3);
-        border-radius: 8px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15),
-                    inset 0 1px 0 rgba(255,255,255,0.6),
-                    0 0 20px rgba(201,169,106,0.15);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-    .flip.animate {
-        transform: rotateX(360deg);
-        box-shadow: 0 12px 25px rgba(0,0,0,0.2),
-                    0 0 25px rgba(201,169,106,0.25);
-    }
+  border: 1px solid rgba(255,255,255,0.4);
 
-    @media (min-width: 768px) {
-        .names { font-size: 56px; letter-spacing: 8px; }
-        .text-block { font-size: 20px; }
-        .section.hero, #info { max-width: 700px; }
-        .flip { width: 70px; height: 60px; font-size: 32px; }
-    }
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.15),
+    inset 0 0 30px rgba(255,255,255,0.3);
+
+  text-align: center;
+  animation: fadeUp 1.5s ease;
+}
+
+/* имена */
+.names {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  letter-spacing: 3px;
+}
+
+/* заголовок */
+.title {
+  margin-top: 10px;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+/* имя гостя */
+.guest {
+  margin: 20px 0;
+  font-size: 20px;
+}
+
+/* детали */
+.details {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* кнопка */
+.button {
+  margin-top: 25px;
+  padding: 12px 26px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(135deg, #d6b98c, #f3e2c7);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* анимация */
+@keyframes fadeUp {
+  from {opacity:0; transform: translateY(30px);}
+  to {opacity:1; transform: translateY(0);}
+}
 </style>
+</head>
+
+<body>
+
+<canvas id="bg"></canvas>
+
+<!-- экран 1 -->
+<div class="screen" id="screen1">
+  <div class="content">
+    <div class="names">РУСЛАН & ЭЛЬВИНА</div>
+    <div class="title">приглашают на свадьбу 💍</div>
+    <div class="guest" id="guestName"></div>
+
+    <div class="details">
+      26 апреля 2026<br>
+      г. Ангрен
+    </div>
+
+    <button class="button" onclick="nextScreen()">Открыть детали</button>
+  </div>
+</div>
+
+<!-- экран 2 -->
+<div class="screen hidden" id="screen2">
+  <div class="content">
+    <div class="names">Тайминг дня</div>
+
+    <div class="details">
+      16:00 — Сбор гостей<br>
+      17:00 — Церемония<br>
+      18:00 — Ужин<br>
+      20:00 — Танцы 🎉
+    </div>
+
+    <button class="button" onclick="back()">Назад</button>
+  </div>
+</div>
+
+<!-- музыка -->
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b5d7.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// ===== имя + пол =====
+const params = new URLSearchParams(window.location.search);
+let fullName = params.get("name");
+let gender = params.get("gender");
+
+if (!fullName) {
+  document.getElementById("guestName").innerText = "Дорогой гость!";
+} else {
+  let firstName = fullName.split(" ")[0].toLowerCase();
+
+  const femaleNames = ["анна","мария","эльвина","айгуль","диана","алина","карина","мадина","сабина","лилия","наиля","зара","камилла","фатима"];
+  const maleNames = ["руслан","азиз","бекзод","али","тимур","ислам","сарвар","жасур","шохрух","абдулла","илхом","акмал"];
+
+  if (!gender) {
+    if (femaleNames.includes(firstName)) gender = "female";
+    else if (maleNames.includes(firstName)) gender = "male";
+    else gender = firstName.endsWith("а") ? "female" : "male";
+  }
+
+  const prefix = gender === "female" ? "Дорогая" : "Дорогой";
+  document.getElementById("guestName").innerText = `${prefix} ${fullName}!`;
+}
+
+// ===== музыка =====
+document.body.addEventListener("click", () => {
+  document.getElementById("music").play();
+}, { once: true });
+
+// ===== экраны =====
+function nextScreen() {
+  document.getElementById("screen1").classList.add("hidden");
+  document.getElementById("screen2").classList.remove("hidden");
+}
+
+function back() {
+  document.getElementById("screen2").classList.add("hidden");
+  document.getElementById("screen1").classList.remove("hidden");
+}
+
+// ===== частицы =====
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 70; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2 + 1,
+    dx: Math.random() * 0.3,
+    dy: Math.random() * 0.3
+  });
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "rgba(255,255,255,0.6)";
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+
+    p.x += p.dx;
+    p.y += p.dy;
+
+    if (p.x > canvas.width) p.x = 0;
+    if (p.y > canvas.height) p.y = 0;
+  });
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+
+</body>
+</html>
