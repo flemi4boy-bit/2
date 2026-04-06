@@ -3,255 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Open Graph (Telegram / WhatsApp / etc.) -->
+
+<title>Свадьба Руслана и Эльвины</title>
+<meta name="description" content="Приглашение на торжество • 26 апреля 2026 • г. Ангрен">
+
+<!-- Open Graph -->
 <meta property="og:title" content="Свадьба Руслана и Эльвины">
 <meta property="og:description" content="Приглашение на торжество • 26 апреля 2026 • г. Ангрен">
 <meta property="og:image" content="https://ruslan-elvina-wedding.vercel.app/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Свадебное приглашение">
 <meta property="og:url" content="https://ruslan-elvina-wedding.vercel.app/">
 <meta property="og:type" content="website">
 
-<!-- Twitter (Telegram тоже использует) -->
+<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Свадьба Руслана и Эльвины">
 <meta name="twitter:description" content="Приглашение на торжество • 26 апреля 2026 • г. Ангрен">
 <meta name="twitter:image" content="https://ruslan-elvina-wedding.vercel.app/preview.jpg">
+<meta name="twitter:url" content="https://ruslan-elvina-wedding.vercel.app/">
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  font-family:'Inter',sans-serif;
-  background:#fdfaf6;
-  overflow:hidden;
-}
+body{margin:0;font-family:'Inter',sans-serif;background:#fdfaf6;overflow:hidden;}
+.wrapper{height:100vh;position:relative;}
 
-.wrapper{
-  height:100vh;
-  position:relative;
-}
-
-/* ===== ЭКРАНЫ ===== */
 .screen{
-  position:absolute;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
+  position:absolute;inset:0;display:flex;justify-content:center;align-items:flex-start;
   padding-top:70px;
-
-  transition:
-    transform .8s cubic-bezier(.22,1,.36,1),
-    opacity .6s ease,
-    filter .6s ease;
+  transition:transform .8s cubic-bezier(.22,1,.36,1),opacity .6s ease,filter .6s ease;
 }
 
-.screen1{
-  transform:translateY(0);
-  opacity:1;
-}
+.screen1{transform:translateY(0);opacity:1;}
+.screen2{transform:translateY(100%);opacity:0;filter:blur(10px);}
 
-.screen2{
-  transform:translateY(100%);
-  opacity:0;
-  filter:blur(10px);
-}
+.wrapper.open .screen1{transform:translateY(-100%);opacity:0;filter:blur(10px);}
+.wrapper.open .screen2{transform:translateY(0);opacity:1;filter:blur(0);}
 
-.wrapper.open .screen1{
-  transform:translateY(-100%);
-  opacity:0;
-  filter:blur(10px);
-}
-
-.wrapper.open .screen2{
-  transform:translateY(0);
-  opacity:1;
-  filter:blur(0);
-}
-
-/* ===== КАРТОЧКА ===== */
 .content{
-  width:92%;
-  max-width:420px;
-  max-height: calc(100vh - 120px);
-  overflow-y:auto;
-  -webkit-overflow-scrolling: touch;
+  width:92%;max-width:420px;max-height:calc(100vh - 120px);
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
 
-  backdrop-filter: blur(25px);
-  background: rgba(255,255,255,0.35);
+  backdrop-filter:blur(25px);
+  background:rgba(255,255,255,0.35);
 
   border-radius:36px;
   border:1px solid rgba(255,255,255,0.4);
-
   box-shadow:0 30px 80px rgba(0,0,0,.12);
 
   padding:48px 28px;
 
-  display:flex;
-  flex-direction:column;
-  gap:30px;
-
-  text-align:center;
+  display:flex;flex-direction:column;gap:30px;text-align:center;
 }
 
 .content::-webkit-scrollbar{display:none;}
 .content{scrollbar-width:none;}
 
-/* ===== ИМЕНА ===== */
-.names{
-  font-family:'Great Vibes',cursive;
-  font-size:clamp(44px,6vw,64px);
-}
-
+.names{font-family:'Great Vibes',cursive;font-size:clamp(44px,6vw,64px);}
 .word{display:block;}
+.amp{display:block;font-family:'Cormorant Garamond',serif;font-size:20px;margin:8px 0;opacity:.5;}
+.letter{display:inline-block;opacity:0;transform:translateY(20px);filter:blur(6px);}
 
-.amp{
-  display:block;
-  font-family:'Cormorant Garamond',serif;
-  font-size:20px;
-  margin:8px 0;
-  opacity:.5;
-}
+.line{width:50%;height:1px;background:rgba(0,0,0,0.08);}
+.date{font-family:'Cormorant Garamond',serif;font-size:18px;opacity:0;transform:translateY(20px);}
 
-.letter{
-  display:inline-block;
-  opacity:0;
-  transform:translateY(20px);
-  filter:blur(6px);
-}
-
-/* ===== ДАТА ===== */
-.line{
-  width:50%;
-  height:1px;
-  background:rgba(0,0,0,0.08);
-}
-
-.date{
-  font-family:'Cormorant Garamond',serif;
-  font-size:18px;
-  opacity:0;
-  transform:translateY(20px);
-}
-
-/* ===== КНОПКИ ===== */
 .button{
-  padding:12px 24px;
-  border-radius:999px;
+  padding:12px 24px;border-radius:999px;
   border:1px solid rgba(0,0,0,0.15);
   background:rgba(255,255,255,0.3);
-  font-size:13px;
-  width:fit-content;
-  align-self:center;
-  cursor:pointer;
+  font-size:13px;width:fit-content;align-self:center;cursor:pointer;
 }
 
-/* ===== ВТОРОЙ ЭКРАН ===== */
-
-.greeting{
-  font-size:14px;
-  opacity:.6;
-}
-
-.block{
-  font-family:'Cormorant Garamond',serif;
-  font-size:18px;
-  line-height:1.6;
-  max-width:28ch;
-  margin:0 auto;
-}
-
-.highlight{
-  font-family:'Cormorant Garamond',serif;
-  font-size:22px;
-}
-
+.greeting{font-size:14px;opacity:.6;}
+.block{font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.6;max-width:28ch;margin:0 auto;}
+.highlight{font-family:'Cormorant Garamond',serif;font-size:22px;}
 .place{opacity:.7;}
 .footer{opacity:.7;}
 
-/* локация */
-.location-title{
-  font-size:12px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  opacity:.5;
-}
+.location-title{font-size:12px;letter-spacing:3px;text-transform:uppercase;opacity:.5;}
 
-/* карты */
-.map{
-  display:flex;
-  gap:8px;
-  justify-content:center;
-}
-
+.map{display:flex;gap:8px;justify-content:center;}
 .map button{
-  padding:8px 14px;
-  border-radius:999px;
+  padding:8px 14px;border-radius:999px;
   border:1px solid rgba(0,0,0,0.12);
   background:rgba(255,255,255,0.2);
-  font-size:12px;
-
-  min-height:32px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  font-size:12px;min-height:32px;
+  display:flex;align-items:center;justify-content:center;
 }
 
-/* ===== ТАЙМЕР (ИДЕАЛЬНО ПОД КНОПКИ) ===== */
 .timer-box{
-  padding:8px 14px;
-  border-radius:999px;
-
+  padding:8px 14px;border-radius:999px;
   border:1px solid rgba(0,0,0,0.12);
   background:rgba(255,255,255,0.2);
-
-  font-size:12px;
-  letter-spacing:.5px;
-
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-
-  min-height:32px;
-
-  margin:0 auto;
-
-  opacity:.7;
+  font-size:12px;display:inline-flex;
+  align-items:center;justify-content:center;
+  min-height:32px;margin:0 auto;opacity:.7;
 }
 
-/* назад */
-.back-btn{
-  font-size:12px;
-  opacity:.5;
-  background:transparent;
-  border:none;
-}
+.back-btn{font-size:12px;opacity:.5;background:transparent;border:none;}
 
-/* ===== FADE БЛОКИ ===== */
 .fade-block{
-  opacity:0;
-  transform:translateY(30px);
-  filter:blur(6px);
+  opacity:0;transform:translateY(30px);filter:blur(6px);
   transition:all .8s cubic-bezier(.22,1,.36,1);
 }
+.fade-block.show{opacity:1;transform:translateY(0);filter:blur(0);}
 
-.fade-block.show{
-  opacity:1;
-  transform:translateY(0);
-  filter:blur(0);
-}
-
-/* контент второго */
-.screen2 .content{
-  opacity:0;
-  transform:translateY(20px);
-  transition:.8s ease;
-}
-
-.wrapper.open .screen2 .content{
-  opacity:1;
-  transform:translateY(0);
-}
+.screen2 .content{opacity:0;transform:translateY(20px);transition:.8s ease;}
+.wrapper.open .screen2 .content{opacity:1;transform:translateY(0);}
 </style>
 </head>
 
@@ -259,7 +119,6 @@ body{
 
 <div class="wrapper" id="wrapper">
 
-<!-- экран 1 -->
 <div class="screen screen1">
 <div class="content">
 
@@ -278,7 +137,6 @@ body{
 </div>
 </div>
 
-<!-- экран 2 -->
 <div class="screen screen2">
 <div class="content">
 
@@ -289,16 +147,10 @@ body{
 день, с которого начинается наша семейная история.
 </div>
 
-<div class="block fade-block">
-Семья начинается с любви, а настоящий праздник — с близких людей.
-Мы будем искренне рады, если вы станете свидетелями начала нашего общего пути.
-</div>
-
 <div class="highlight fade-block">26 апреля 2026</div>
 
 <div class="block fade-block">
-Сбор гостей: 17:30<br>
-Начало торжества: 18:00
+Сбор гостей: 17:30<br>Начало торжества: 18:00
 </div>
 
 <div class="place fade-block">
@@ -329,43 +181,36 @@ body{
 const wrapper=document.getElementById("wrapper");
 
 function openInvite(){wrapper.classList.add("open");}
-function closeInvite(){wrapper.classList.remove("open"); setTimeout(animate,500);}
+function closeInvite(){wrapper.classList.remove("open");setTimeout(animate,500);}
 
 function animate(){
   const words=document.querySelectorAll(".word");
   const amp=document.getElementById("amp");
   const date=document.getElementById("date");
 
-  amp.style.opacity=0;
-  date.style.opacity=0;
-
   words.forEach(word=>{
-    const text=word.textContent;
+    const original=word.dataset.text||word.textContent;
+    word.dataset.text=original;
     word.innerHTML="";
-    text.split("").forEach((char,i)=>{
+    original.split("").forEach((char,i)=>{
       const span=document.createElement("span");
       span.textContent=char;
       span.classList.add("letter");
       word.appendChild(span);
-
       setTimeout(()=>{
         span.style.transition="1s cubic-bezier(.22,1,.36,1)";
         span.style.opacity="1";
         span.style.transform="translateY(0)";
         span.style.filter="blur(0)";
-      }, i*80);
+      },i*80);
     });
   });
 
   setTimeout(()=>amp.style.opacity="0.5",900);
-  setTimeout(()=>{
-    date.style.transition="1.2s ease";
-    date.style.opacity="0.8";
-    date.style.transform="translateY(0)";
-  },1300);
+  setTimeout(()=>{date.style.opacity="0.8";date.style.transform="translateY(0)";},1300);
 }
 
-animate();
+window.onload=animate;
 
 /* имя */
 const params=new URLSearchParams(location.search);
@@ -390,7 +235,7 @@ setInterval(()=>{
   `До свадьбы: ${d} дней ${h} часов`;
 },1000);
 
-/* fade при скролле */
+/* fade */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
@@ -399,9 +244,7 @@ const observer=new IntersectionObserver(entries=>{
   });
 },{threshold:0.2});
 
-document.querySelectorAll(".fade-block").forEach(el=>{
-  observer.observe(el);
-});
+document.querySelectorAll(".fade-block").forEach(el=>observer.observe(el));
 </script>
 
 </body>
