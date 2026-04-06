@@ -5,113 +5,100 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Свадьба Руслана и Эльвины</title>
-<meta name="description" content="Приглашение на торжество • 26 апреля 2026 • г. Ангрен">
 
-<!-- Open Graph -->
-<meta property="og:title" content="Свадьба Руслана и Эльвины">
-<meta property="og:description" content="Приглашение на торжество • 26 апреля 2026 • г. Ангрен">
-<meta property="og:image" content="https://ruslan-elvina-wedding.vercel.app/preview.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Свадебное приглашение">
-<meta property="og:url" content="https://ruslan-elvina-wedding.vercel.app/">
-<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Свадьба Руслана и Эльвины">
-<meta name="twitter:description" content="Приглашение на торжество • 26 апреля 2026 • г. Ангрен">
-<meta name="twitter:image" content="https://ruslan-elvina-wedding.vercel.app/preview.jpg">
-<meta name="twitter:url" content="https://ruslan-elvina-wedding.vercel.app/">
-
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-body{margin:0;font-family:'Inter',sans-serif;background:#fdfaf6;overflow:hidden;}
+body{margin:0;font-family:'Inter',sans-serif;background:#f6f1e8 url('https://www.transparenttextures.com/patterns/paper-fibers.png');overflow:hidden;}
 .wrapper{height:100vh;position:relative;}
 
-.screen{
-  position:absolute;inset:0;display:flex;justify-content:center;align-items:flex-start;
-  padding-top:70px;
-  transition:transform .8s cubic-bezier(.22,1,.36,1),opacity .6s ease,filter .6s ease;
+.screen{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;transition:.8s cubic-bezier(.22,1,.36,1);} 
+.wrapper.dragging .screen{transition:none;}
+.screen1{transform:translateY(0);} 
+.screen2{transform:translateY(100%);opacity:0;} 
+.wrapper.open .screen1{transform:translateY(-100%);opacity:0;} 
+.wrapper.open .screen2{transform:translateY(0);opacity:1;} 
+
+.content{width:92%;max-width:480px;padding:60px 30px;background:linear-gradient(180deg,#ffffff,#f7f3ec);border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,0.1);display:flex;flex-direction:column;gap:26px;text-align:center;}
+
+.names{display:flex;flex-direction:column;gap:6px;}
+.name{font-family:'Great Vibes';font-size:clamp(56px,7vw,80px);color:#b8965a;opacity:0;transition:1s cubic-bezier(.22,1,.36,1);} 
+.left{transform:translateX(-80px);} 
+.right{transform:translateX(80px);} 
+.name.show{opacity:1;transform:translateX(0);} 
+
+.amp{font-family:'Great Vibes';font-size:40px;color:#b8965a;opacity:0;transform:scale(.8);transition:.6s;} 
+.amp.show{opacity:.8;transform:scale(1);} 
+
+.divider{display:flex;align-items:center;justify-content:center;gap:10px;} 
+.line{width:90px;height:1px;background:#b8965a;opacity:.5;} 
+.dot{width:6px;height:6px;border-radius:50%;background:#b8965a;} 
+
+.date{font-family:'Cormorant Garamond';font-size:24px;font-style:italic;color:#4a3b2a;} 
+.date-letter{opacity:0;display:inline-block;transform:translateY(10px);} 
+
+.button{padding:10px 22px;border-radius:999px;border:1px solid #b8965a;background:transparent;color:#4a3b2a;font-size:14px;cursor:pointer;width:fit-content;align-self:center;transition:.25s;} 
+.button:hover{background:#b8965a;color:white;transform:translateY(-2px);} 
+.button:active{transform:scale(.96);} 
+
+.greeting{font-family:'Great Vibes';font-size:34px;color:#b8965a;} 
+
+.block{font-family:'Cormorant Garamond';font-size:19px;font-weight:600;line-height:1.6;} 
+
+.event-line{font-family:'Cormorant Garamond';font-size:20px;font-weight:600;line-height:1.8;} 
+
+.schedule{
+  font-family:'Cormorant Garamond';
+  font-size:20px;
+  font-weight:700;
+  color:#b8965a;
+  line-height:1.8;
 }
 
-.screen1{transform:translateY(0);opacity:1;}
-.screen2{transform:translateY(100%);opacity:0;filter:blur(10px);}
-
-.wrapper.open .screen1{transform:translateY(-100%);opacity:0;filter:blur(10px);}
-.wrapper.open .screen2{transform:translateY(0);opacity:1;filter:blur(0);}
-
-.content{
-  width:92%;max-width:420px;max-height:calc(100vh - 120px);
-  overflow-y:auto;-webkit-overflow-scrolling:touch;
-
-  backdrop-filter:blur(25px);
-  background:rgba(255,255,255,0.35);
-
-  border-radius:36px;
-  border:1px solid rgba(255,255,255,0.4);
-  box-shadow:0 30px 80px rgba(0,0,0,.12);
-
-  padding:48px 28px;
-
-  display:flex;flex-direction:column;gap:30px;text-align:center;
+/* НОВЫЙ ТАЙМЕР */
+.timer{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-top:10px;
 }
 
-.content::-webkit-scrollbar{display:none;}
-.content{scrollbar-width:none;}
-
-.names{font-family:'Great Vibes',cursive;font-size:clamp(44px,6vw,64px);}
-.word{display:block;}
-.amp{display:block;font-family:'Cormorant Garamond',serif;font-size:20px;margin:8px 0;opacity:.5;}
-.letter{display:inline-block;opacity:0;transform:translateY(20px);filter:blur(6px);}
-
-.line{width:50%;height:1px;background:rgba(0,0,0,0.08);}
-.date{font-family:'Cormorant Garamond',serif;font-size:18px;opacity:0;transform:translateY(20px);}
-
-.button{
-  padding:12px 24px;border-radius:999px;
-  border:1px solid rgba(0,0,0,0.15);
-  background:rgba(255,255,255,0.3);
-  font-size:13px;width:fit-content;align-self:center;cursor:pointer;
+.timer-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
-.greeting{font-size:14px;opacity:.6;}
-.block{font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.6;max-width:28ch;margin:0 auto;}
-.highlight{font-family:'Cormorant Garamond',serif;font-size:22px;}
-.place{opacity:.7;}
-.footer{opacity:.7;}
-
-.location-title{font-size:12px;letter-spacing:3px;text-transform:uppercase;opacity:.5;}
-
-.map{display:flex;gap:8px;justify-content:center;}
-.map button{
-  padding:8px 14px;border-radius:999px;
-  border:1px solid rgba(0,0,0,0.12);
-  background:rgba(255,255,255,0.2);
-  font-size:12px;min-height:32px;
-  display:flex;align-items:center;justify-content:center;
+.timer-num{
+  font-family:'Cormorant Garamond';
+  font-size:28px;
+  color:#b8965a;
+  letter-spacing:2px;
 }
 
-.timer-box{
-  padding:8px 14px;border-radius:999px;
-  border:1px solid rgba(0,0,0,0.12);
-  background:rgba(255,255,255,0.2);
-  font-size:12px;display:inline-flex;
-  align-items:center;justify-content:center;
-  min-height:32px;margin:0 auto;opacity:.7;
+.timer-label{
+  font-size:10px;
+  opacity:.6;
+  letter-spacing:2px;
 }
 
-.back-btn{font-size:12px;opacity:.5;background:transparent;border:none;}
-
-.fade-block{
-  opacity:0;transform:translateY(30px);filter:blur(6px);
-  transition:all .8s cubic-bezier(.22,1,.36,1);
+.timer-sep{
+  font-size:24px;
+  opacity:.4;
+  align-self:center;
 }
-.fade-block.show{opacity:1;transform:translateY(0);filter:blur(0);}
 
-.screen2 .content{opacity:0;transform:translateY(20px);transition:.8s ease;}
-.wrapper.open .screen2 .content{opacity:1;transform:translateY(0);}
+.location-title{font-size:12px;letter-spacing:3px;opacity:.6;} 
+.map{display:flex;gap:10px;justify-content:center;} 
+.map button{padding:8px 14px;border-radius:999px;border:1px solid #b8965a;background:transparent;} 
+
+.back{font-size:12px;opacity:.3;border:none;background:none;} 
+
+.fade-block{opacity:0;transform:translateY(20px);transition:.8s;} 
+.fade-block.show{opacity:1;transform:translateY(0);} 
 </style>
 </head>
 
@@ -123,14 +110,14 @@ body{margin:0;font-family:'Inter',sans-serif;background:#fdfaf6;overflow:hidden;
 <div class="content">
 
 <div class="names">
-  <span class="word">Руслан</span>
+  <span class="name left" id="name1">Руслан</span>
   <span class="amp" id="amp">&</span>
-  <span class="word">Эльвина</span>
+  <span class="name right" id="name2">Эльвина</span>
 </div>
 
-<div class="line"></div>
-<div class="date" id="date">26 апреля 2026</div>
-<div class="line"></div>
+<div class="divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+
+<div class="date" id="date" data-text="26 апреля 2026"></div>
 
 <button class="button" onclick="openInvite()">Открыть приглашение</button>
 
@@ -143,34 +130,32 @@ body{margin:0;font-family:'Inter',sans-serif;background:#fdfaf6;overflow:hidden;
 <div id="guestName" class="greeting fade-block"></div>
 
 <div class="block fade-block">
-С большой радостью приглашаем вас разделить с нами один из самых важных дней в нашей жизни —
-день, с которого начинается наша семейная история.
+С большой радостью приглашаем Вас разделить с нами<br>
+один из самых важных дней в нашей жизни — день,<br>
+с которого начинается наша семейная история.
 </div>
 
-<div class="highlight fade-block">26 апреля 2026</div>
-
-<div class="block fade-block">
-Сбор гостей: 17:30<br>Начало торжества: 18:00
+<div class="event-line fade-block">
+26 апреля 2026
 </div>
 
-<div class="place fade-block">
-Банкетный зал "OQ SAROY"<br>г. Ангрен
+<div class="schedule fade-block">
+Сбор гостей — 17:30<br>
+Начало торжества — 18:00
 </div>
+
+<div class="block fade-block">Банкетный зал «OQ SAROY»<br>г. Ангрен</div>
+
+<div class="timer fade-block" id="timer"></div>
 
 <div class="location-title fade-block">Локация</div>
 
 <div class="map fade-block">
-<a href="#"><button>Яндекс</button></a>
-<a href="#"><button>Google</button></a>
+<a href="https://yandex.uz/maps/101550/angren/?z=19"><button>Яндекс</button></a>
+<a href="https://www.google.com/maps/place/40.9994792,70.0747963"><button>Google</button></a>
 </div>
 
-<div class="timer-box fade-block" id="timer"></div>
-
-<div class="footer fade-block">
-С любовью,<br>Руслан и Эльвина
-</div>
-
-<button class="back-btn fade-block" onclick="closeInvite()">Назад</button>
+<button class="back fade-block" onclick="closeInvite()">назад</button>
 
 </div>
 </div>
@@ -179,72 +164,49 @@ body{margin:0;font-family:'Inter',sans-serif;background:#fdfaf6;overflow:hidden;
 
 <script>
 const wrapper=document.getElementById("wrapper");
-
 function openInvite(){wrapper.classList.add("open");}
-function closeInvite(){wrapper.classList.remove("open");setTimeout(animate,500);}
+function closeInvite(){wrapper.classList.remove("open");}
 
-function animate(){
-  const words=document.querySelectorAll(".word");
-  const amp=document.getElementById("amp");
+function animateNames(){name1.classList.add("show");name2.classList.add("show");setTimeout(()=>amp.classList.add("show"),500);} 
+
+function animateDate(){
   const date=document.getElementById("date");
-
-  words.forEach(word=>{
-    const original=word.dataset.text||word.textContent;
-    word.dataset.text=original;
-    word.innerHTML="";
-    original.split("").forEach((char,i)=>{
-      const span=document.createElement("span");
-      span.textContent=char;
-      span.classList.add("letter");
-      word.appendChild(span);
-      setTimeout(()=>{
-        span.style.transition="1s cubic-bezier(.22,1,.36,1)";
-        span.style.opacity="1";
-        span.style.transform="translateY(0)";
-        span.style.filter="blur(0)";
-      },i*80);
-    });
+  const text=date.dataset.text;
+  date.innerHTML="";
+  text.split("").forEach((c,i)=>{
+    const span=document.createElement("span");
+    span.textContent=c;
+    span.classList.add("date-letter");
+    date.appendChild(span);
+    setTimeout(()=>{span.style.opacity=1;span.style.transform="translateY(0)";},600+i*30);
   });
-
-  setTimeout(()=>amp.style.opacity="0.5",900);
-  setTimeout(()=>{date.style.opacity="0.8";date.style.transform="translateY(0)";},1300);
 }
 
-window.onload=animate;
+window.addEventListener("DOMContentLoaded",()=>{animateNames();animateDate();});
 
-/* имя */
 const params=new URLSearchParams(location.search);
-let full=params.get("name");
-const el=document.getElementById("guestName");
+let name=params.get("name");
+document.getElementById("guestName").innerText=name
+? `Дорогие ${decodeURIComponent(name).replace(" "," и ")}!`
+: "Дорогой гость!";
 
-if(full){
-  full=decodeURIComponent(full);
-  const parts=full.trim().split(/\s+/);
-  el.innerText=parts.length>=2
-    ? `Дорогие ${parts.join(" и ")}!`
-    : (parts[0].endsWith("а")?"Дорогая ":"Дорогой ")+full+"!";
-}else el.innerText="Дорогой гость!";
-
-/* таймер */
 const end=new Date("2026-04-26T17:30:00").getTime();
 setInterval(()=>{
   let diff=end-Date.now();
   let d=Math.floor(diff/86400000);
   let h=Math.floor(diff/3600000)%24;
-  document.getElementById("timer").innerText=
-  `До свадьбы: ${d} дней ${h} часов`;
+  let m=Math.floor(diff/60000)%60;
+
+  document.getElementById("timer").innerHTML=`
+  <div class="timer-item"><div class="timer-num">${d}</div><div class="timer-label">ДНЕЙ</div></div>
+  <div class="timer-sep">:</div>
+  <div class="timer-item"><div class="timer-num">${h}</div><div class="timer-label">ЧАСОВ</div></div>
+  <div class="timer-sep">:</div>
+  <div class="timer-item"><div class="timer-num">${m}</div><div class="timer-label">МИН</div></div>`;
 },1000);
 
-/* fade */
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("show");
-    }
-  });
-},{threshold:0.2});
-
-document.querySelectorAll(".fade-block").forEach(el=>observer.observe(el));
+const obs=new IntersectionObserver(e=>{e.forEach(i=>i.isIntersecting&&i.target.classList.add("show"));});
+document.querySelectorAll(".fade-block").forEach(el=>obs.observe(el));
 </script>
 
 </body>
