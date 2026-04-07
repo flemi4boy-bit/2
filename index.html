@@ -12,49 +12,169 @@
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-body{margin:0;font-family:'Inter',sans-serif;background:#f6f1e8 url('https://www.transparenttextures.com/patterns/paper-fibers.png');overflow:hidden;}
+body{margin:0;font-family:'Inter',sans-serif;background:#f2ebe3 url('https://www.transparenttextures.com/patterns/paper-fibers.png');overflow:hidden;}
 .wrapper{height:100vh;position:relative;}
 
-.screen{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;transition:.8s cubic-bezier(.22,1,.36,1);} 
+.screen{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;transition:1.2s cubic-bezier(.22,1,.36,1);} 
 .wrapper.dragging .screen{transition:none;}
 .screen1{transform:translateY(0);} 
 .screen2{transform:translateY(100%);opacity:0;} 
 .wrapper.open .screen1{transform:translateY(-100%);opacity:0;} 
 .wrapper.open .screen2{transform:translateY(0);opacity:1;} 
 
-.content{width:92%;max-width:480px;padding:60px 30px;background:linear-gradient(180deg,#ffffff,#f7f3ec);border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,0.1);display:flex;flex-direction:column;gap:26px;text-align:center;}
+.content{
+  width:92%;
+  max-width:480px;
+  padding:60px 30px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(184,150,90,.08), transparent 60%),
+    linear-gradient(120deg,#fbf7f2,#f3ede5);
+  border-radius:20px;
+  box-shadow:0 30px 80px rgba(120,90,40,.08), inset 0 1px 0 rgba(255,255,255,.7);
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
 
-.names{display:flex;flex-direction:column;gap:6px;}
-.name{font-family:'Great Vibes';font-size:clamp(56px,7vw,80px);color:#b8965a;opacity:0;transition:1s cubic-bezier(.22,1,.36,1);} 
+/* shimmer эффект */
+.content::after{
+  content:"";
+  position:absolute;
+  top:-100%;
+  left:-100%;
+  width:200%;
+  height:200%;
+  background:linear-gradient(120deg, transparent 40%, rgba(255,255,255,.4) 50%, transparent 60%);
+  transform:rotate(20deg);
+  animation:shimmer 6s infinite;
+}
+
+@keyframes shimmer{
+  0%{transform:translate(-100%,-100%) rotate(20deg);}
+  100%{transform:translate(100%,100%) rotate(20deg);}
+}
+
+/* слой контента выше эффектов */
+.content > *{position:relative;z-index:2;}
+
+
+  10%{opacity:1;}
+  100%{transform:translateY(120%) translateX(30px);opacity:0;}
+}
+}
+
+
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.names{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
+.name,.amp{display:block;}
+.name{font-family:'Great Vibes';font-size:clamp(56px,7vw,80px);color:#c9a66b;opacity:0;transition:1.6s cubic-bezier(.22,1,.36,1);} 
 .left{transform:translateX(-80px);} 
 .right{transform:translateX(80px);} 
 .name.show{opacity:1;transform:translateX(0);} 
 
-.amp{font-family:'Great Vibes';font-size:40px;color:#b8965a;opacity:0;transform:scale(.8);transition:.6s;} 
+.amp{font-family:'Great Vibes';font-size:40px;color:#c9a66b;opacity:0;transform:scale(.8);transition:1.2s;} 
 .amp.show{opacity:.8;transform:scale(1);} 
 
 .divider{display:flex;align-items:center;justify-content:center;gap:10px;} 
-.line{width:90px;height:1px;background:#b8965a;opacity:.5;} 
-.dot{width:6px;height:6px;border-radius:50%;background:#b8965a;} 
+.line{width:90px;height:1px;background:rgba(201,166,107,.45);opacity:.5;} 
+.dot{width:6px;height:6px;border-radius:50%;background:#c9a66b;} 
 
-.date{font-family:'Cormorant Garamond';font-size:24px;font-style:italic;color:#4a3b2a;} 
+.date{
+  font-family:'Great Vibes';
+  font-size:32px;
+  color:#c9a66b;
+  letter-spacing:1px;
+} 
 .date-letter{opacity:0;display:inline-block;transform:translateY(10px);} 
 
-.button{padding:10px 22px;border-radius:999px;border:1px solid #b8965a;background:transparent;color:#4a3b2a;font-size:14px;cursor:pointer;width:fit-content;align-self:center;transition:.25s;} 
-.button:hover{background:#b8965a;color:white;transform:translateY(-2px);} 
+.button{
+  padding:10px 22px;
+  border-radius:999px;
+  border:1px solid #c9a66b;
+  background:transparent;
+  color:#c9a66b;
+  font-size:14px;
+  cursor:pointer;
+  width:fit-content;
+  align-self:center;
+  transition:.25s;
+} 
+.button:hover{background:#c9a66b;color:white;transform:translateY(-2px);} 
 .button:active{transform:scale(.96);} 
 
-.greeting{font-family:'Great Vibes';font-size:34px;color:#b8965a;} 
+.greeting{font-family:'Great Vibes';font-size:34px;color:#c9a66b;} 
 
-.block{font-family:'Cormorant Garamond';font-size:19px;font-weight:600;line-height:1.6;} 
+.block{
+  font-family:'Cormorant Garamond';
+  font-size:24px;
+  line-height:1.9;
+  color:#c9a66b;
+  text-align:center;
+  max-width:380px;
+  margin:0 auto;
+} 
 
-.event-line{font-family:'Cormorant Garamond';font-size:20px;font-weight:600;line-height:1.8;} 
+.event-line{
+  font-family:'Cormorant Garamond';
+  font-size:18px;
+  font-weight:500;
+  color:#c9a66b;
+  line-height:1.8;
+}
+
+.event-line .main-date{
+  font-size:26px;
+  margin-bottom:6px;
+}
+
+.event-line .time{
+  font-size:16px;
+  opacity:.8;
+}
+
+.event-line .main-date{
+  font-size:28px;
+  margin-bottom:6px;
+}
+
+.event-line .time{
+  font-size:16px;
+  opacity:.8;
+}
+
+.event-line .main-date{
+  font-size:28px;
+  margin-bottom:6px;
+  color:#c9a66b;
+}
+
+.event-line .time{
+  font-size:18px;
+  opacity:.8;
+  color:#c9a66b;
+}
+
+.event-line .main-date{
+  font-size:28px;
+  margin-bottom:6px;
+}
+
+.event-line .time{
+  font-size:18px;
+  opacity:.8;
+} 
 
 .schedule{
   font-family:'Cormorant Garamond';
-  font-size:20px;
-  font-weight:700;
-  color:#b8965a;
+  font-size:22px;
+  font-weight:600;
+  color:#6a5a45;
   line-height:1.8;
 }
 
@@ -75,7 +195,7 @@ body{margin:0;font-family:'Inter',sans-serif;background:#f6f1e8 url('https://www
 .timer-num{
   font-family:'Cormorant Garamond';
   font-size:28px;
-  color:#b8965a;
+  color:#c9a66b;
   letter-spacing:2px;
 }
 
@@ -83,6 +203,7 @@ body{margin:0;font-family:'Inter',sans-serif;background:#f6f1e8 url('https://www
   font-size:10px;
   opacity:.6;
   letter-spacing:2px;
+  color:#c9a66b;
 }
 
 .timer-sep{
@@ -91,14 +212,115 @@ body{margin:0;font-family:'Inter',sans-serif;background:#f6f1e8 url('https://www
   align-self:center;
 }
 
-.location-title{font-size:12px;letter-spacing:3px;opacity:.6;} 
+.location-title{
+  font-size:12px;
+  letter-spacing:3px;
+  opacity:.6;
+  color:#c9a66b;
+  font-family:'Cormorant Garamond';
+} 
 .map{display:flex;gap:10px;justify-content:center;} 
-.map button{padding:8px 14px;border-radius:999px;border:1px solid #b8965a;background:transparent;} 
+.map button{
+  padding:10px 18px;
+  border-radius:999px;
+  border:1px solid #c9a66b;
+  background:transparent;
+  color:#c9a66b;
+  cursor:pointer;
+  transition:.25s;
+}
 
-.back{font-size:12px;opacity:.3;border:none;background:none;} 
+.map button:hover{
+  background:#c9a66b;
+  color:white;
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(184,150,90,.3);
+}
 
-.fade-block{opacity:0;transform:translateY(20px);transition:.8s;} 
+.map button:active{
+  transform:scale(.95);
+} 
+
+.back{
+  font-size:12px;
+  opacity:.4;
+  border:none;
+  background:none;
+  color:#c9a66b;
+  font-family:'Cormorant Garamond';
+  cursor:pointer;
+} 
+
+.fade-block{opacity:0;transform:translateY(20px);transition:1.2s;}
 .fade-block.show{opacity:1;transform:translateY(0);} 
+
+/* подпись — вау эффект */
+.signature{
+  font-family:'Great Vibes';
+  font-size:28px;
+  color:#c9a66b;
+  opacity:0;
+  transform:translateY(20px) scale(.98);
+  filter:blur(2px);
+  transition:1.8s cubic-bezier(.22,1,.36,1);
+  transition-delay:.7s;
+}
+.signature.show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+}
+.signature::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:120%;
+  height:120%;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle, rgba(201,166,107,.15), transparent 70%);
+  z-index:-1;
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+/* легкий декоративный орнамент (только ::before) */
+.content::before{
+  content:"";
+  position:absolute;
+  width:140px;
+  height:140px;
+  pointer-events:none;
+  opacity:.22;
+  top:0;
+  left:0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(184,150,90,.25) 2px, transparent 3px) 0 0/28px 28px,
+    linear-gradient(135deg, rgba(184,150,90,.25) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at top left, black 40%, transparent 80%);
+}
+
+/* shimmer (оставляем в ::after) */
+.content::after{
+  content:"";
+  position:absolute;
+  top:-100%;
+  left:-100%;
+  width:200%;
+  height:200%;
+  background:linear-gradient(120deg, transparent 40%, rgba(255,255,255,.28) 50%, transparent 60%);
+  transform:rotate(20deg);
+  animation:shimmer 14s infinite;
+}
 </style>
 </head>
 
@@ -108,6 +330,9 @@ body{margin:0;font-family:'Inter',sans-serif;background:#f6f1e8 url('https://www
 
 <div class="screen screen1">
 <div class="content">
+
+
+
 
 <div class="names">
   <span class="name left" id="name1">Руслан</span>
@@ -119,6 +344,8 @@ body{margin:0;font-family:'Inter',sans-serif;background:#f6f1e8 url('https://www
 
 <div class="date" id="date" data-text="26 апреля 2026"></div>
 
+<div class="divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+
 <button class="button" onclick="openInvite()">Открыть приглашение</button>
 
 </div>
@@ -127,32 +354,39 @@ body{margin:0;font-family:'Inter',sans-serif;background:#f6f1e8 url('https://www
 <div class="screen screen2">
 <div class="content">
 
+
+
+
 <div id="guestName" class="greeting fade-block"></div>
 
 <div class="block fade-block">
-С большой радостью приглашаем Вас разделить с нами<br>
-один из самых важных дней в нашей жизни — день,<br>
-с которого начинается наша семейная история.
+С большой радостью приглашаем Вас<br>
+разделить с нами один из самых<br>
+важных дней в нашей жизни — день,<br>
+с которого начинается наша<br>
+семейная история.
 </div>
 
 <div class="event-line fade-block">
-26 апреля 2026
+<span class="main-date">26 апреля 2026</span><br>
+<span class="time">Сбор гостей — 17:30</span><br>
+<span class="time">Начало торжества — 18:00</span><br>
+Банкетный зал «OQ SAROY»<br>
+г. Ангрен
 </div>
 
-<div class="schedule fade-block">
-Сбор гостей — 17:30<br>
-Начало торжества — 18:00
+<div class="signature fade-block" style="margin-top:10px;">
+С любовью,<br>
+Руслан и Эльвина
 </div>
-
-<div class="block fade-block">Банкетный зал «OQ SAROY»<br>г. Ангрен</div>
 
 <div class="timer fade-block" id="timer"></div>
 
 <div class="location-title fade-block">Локация</div>
 
 <div class="map fade-block">
-<a href="https://yandex.uz/maps/101550/angren/?z=19"><button>Яндекс</button></a>
-<a href="https://www.google.com/maps/place/40.9994792,70.0747963"><button>Google</button></a>
+<a href="#" onclick="openYandex(event)"><button>Яндекс</button></a>
+<a href="https://www.google.com/maps/place/40.9994792,70.0747963" target="_blank"><button>Google</button></a>
 </div>
 
 <button class="back fade-block" onclick="closeInvite()">назад</button>
@@ -167,7 +401,7 @@ const wrapper=document.getElementById("wrapper");
 function openInvite(){wrapper.classList.add("open");}
 function closeInvite(){wrapper.classList.remove("open");}
 
-function animateNames(){name1.classList.add("show");name2.classList.add("show");setTimeout(()=>amp.classList.add("show"),500);} 
+function animateNames(){name1.classList.add("show");name2.classList.add("show");setTimeout(()=>amp.classList.add("show"),900);} 
 
 function animateDate(){
   const date=document.getElementById("date");
@@ -178,7 +412,7 @@ function animateDate(){
     span.textContent=c;
     span.classList.add("date-letter");
     date.appendChild(span);
-    setTimeout(()=>{span.style.opacity=1;span.style.transform="translateY(0)";},600+i*30);
+    setTimeout(()=>{span.style.opacity=1;span.style.transform="translateY(0)";},900+i*50);
   });
 }
 
@@ -207,6 +441,28 @@ setInterval(()=>{
 
 const obs=new IntersectionObserver(e=>{e.forEach(i=>i.isIntersecting&&i.target.classList.add("show"));});
 document.querySelectorAll(".fade-block").forEach(el=>obs.observe(el));
+
+function openYandex(e){
+  e.preventDefault();
+
+  const appLink = "yandexmaps://maps.yandex.ru/?ll=70.074589,40.999666&z=20";
+  const webLink = "https://yandex.uz/maps/101550/angren/?ll=70.074770%2C40.999549&mode=search&sll=70.074589%2C40.999666&text=40.999666%2C70.074589&z=20";
+
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  if(isMobile){
+    const openApp = confirm("Открыть в приложении Яндекс.Карты?");
+    if(openApp){
+      window.location.href = appLink;
+    } else {
+      window.open(webLink, "_blank");
+    }
+  } else {
+    window.open(webLink, "_blank");
+  }
+}
+
+
 </script>
 
 </body>
