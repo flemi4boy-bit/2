@@ -35,7 +35,7 @@ body{margin:0;font-family:'Inter',sans-serif;background:#f2ebe3 url('https://www
 .content{
   width:92%;
   max-width:480px;
-  padding:60px 30px;
+  padding:50px 24px;
   background:
     radial-gradient(circle at 30% 20%, rgba(184,150,90,.08), transparent 60%),
     linear-gradient(120deg,#fbf7f2,#f3ede5);
@@ -43,7 +43,10 @@ body{margin:0;font-family:'Inter',sans-serif;background:#f2ebe3 url('https://www
   box-shadow:0 30px 80px rgba(120,90,40,.08), inset 0 1px 0 rgba(255,255,255,.7);
   display:flex;
   flex-direction:column;
-  gap:20px;
+  gap:16px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
   text-align:center;
   position:relative;
   overflow:hidden;
@@ -97,7 +100,7 @@ body{margin:0;font-family:'Inter',sans-serif;background:#f2ebe3 url('https://www
 
 .date{
   font-family:'Great Vibes';
-  font-size:32px;
+  font-size:clamp(26px,6vw,32px);
   color:#c9a66b;
   letter-spacing:1px;
 } 
@@ -122,20 +125,54 @@ body{margin:0;font-family:'Inter',sans-serif;background:#f2ebe3 url('https://www
 
 .block{
   font-family:'Cormorant Garamond';
-  font-size:24px;
-  line-height:1.9;
+  font-size:clamp(18px, 4.5vw, 24px);
+  line-height:1.55;
   color:#c9a66b;
   text-align:center;
-  max-width:380px;
+  max-width:90%;
   margin:0 auto;
+  letter-spacing:0.3px;
+}
+
+@media (max-width:480px){
+  .content{
+    padding:40px 18px;
+    gap:14px;
+  }
+
+  .name{
+    font-size:clamp(42px,9vw,60px);
+  }
+
+  .amp{
+    font-size:32px;
+  }
+
+  .date{
+    font-size:24px;
+  }
+
+  .block{
+    font-size:18px;
+    line-height:1.5;
+  }
+
+  .event-line{
+    font-size:15px;
+  }
+
+  .timer-num{
+    font-size:22px;
+  }
+}
 } 
 
 .event-line{
   font-family:'Cormorant Garamond';
-  font-size:18px;
+  font-size:clamp(16px,4vw,18px);
   font-weight:500;
   color:#c9a66b;
-  line-height:1.8;
+  line-height:1.6;
 }
 
 .event-line .main-date{
@@ -192,8 +229,8 @@ body{margin:0;font-family:'Inter',sans-serif;background:#f2ebe3 url('https://www
 .timer{
   display:flex;
   justify-content:center;
-  gap:14px;
-  margin-top:10px;
+  gap:10px;
+  margin-top:6px;
 }
 
 .timer-item{
