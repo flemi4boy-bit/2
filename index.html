@@ -269,7 +269,7 @@ function setGreeting(){
 
 // --- get name from URL ---
 function getNameFromURL(){
-  const params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(window.location.hash.slice(1));
   const name = params.get("name");
   return name ? decodeURIComponent(name) : null;
 }
