@@ -210,13 +210,19 @@ function getGender(name){
 }
 
 function setGreeting(){
-  const name = document.getElementById("n1").innerText;
-  const gender = getGender(name);
+  const name = window.guestName || null;
   const el = document.getElementById("greeting");
 
-  if(gender === "female") el.innerText = "Дорогая гостья!";
-  else if(gender === "male") el.innerText = "Дорогой гость!";
-  else el.innerText = "Дорогие гости!";
+  if(!name){
+    el.innerText = "Дорогие гости!";
+    return;
+  }
+
+  const gender = getGender(name);
+
+  if(gender === "female") el.innerText = `Дорогая ${name}!`;
+  else if(gender === "male") el.innerText = `Дорогой ${name}!`;
+  else el.innerText = `Дорогие ${name}!`;
 }
 
 // --- get name from URL ---
@@ -229,9 +235,11 @@ function getNameFromURL(){
 function initName(){
   const urlName = getNameFromURL();
   if(urlName){
-    document.getElementById("n1").innerText = urlName;
+    // НЕ трогаем имена пары
+    window.guestName = urlName;
   }
 }
+
 
 initName();
 setGreeting();
