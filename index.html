@@ -7,10 +7,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600&family=Cormorant+Infant:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-body{margin:0;font-family:'Inter',sans-serif;background:#f2ebe3;color:#8f7443;}
+body{margin:0;font-family:'Inter',sans-serif;background:#f2ebe3;color:#8f7443;scroll-behavior:smooth;}
 .wrapper{height:100vh;overflow:hidden;position:relative;}
 .screen{position:absolute; inset:0;display:flex; justify-content:center; align-items:flex-start;padding-top:60px;transition:1s;}
-.screen2{transform:translateY(100%);opacity:0;overflow-y:auto;}
+.screen2{transform:translateY(100%);opacity:0;overflow-y:auto;scroll-behavior:smooth;}
 .wrapper.open .screen1{transform:translateY(-100%);opacity:0;}
 .wrapper.open .screen2{transform:translateY(0);opacity:1;}
 .content{width:92%; max-width:420px;padding:42px 26px;background:#fbf7f2;border-radius:22px;display:flex; flex-direction:column; gap:24px;text-align:center;}
@@ -135,7 +135,7 @@ function openInvite(){
 
   // reset scroll to top
   const s2 = document.querySelector('.screen2');
-  if(s2) s2.scrollTop = 0;
+  if(s2) s2.scrollTo({ top: 0, behavior: 'smooth' });
 
   restartLineAnimation();
 
@@ -151,7 +151,7 @@ function closeInvite(){
   document.querySelectorAll(".fade").forEach(el=>el.classList.remove("show"));
 
   const s2 = document.querySelector('.screen2');
-  if(s2) s2.scrollTop = 0;
+  if(s2) s2.scrollTo({ top: 0, behavior: 'smooth' });
 
   restartLineAnimation();
 }
