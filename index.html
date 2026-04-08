@@ -227,7 +227,7 @@ function getGender(name){
 
 function getMode(){
   const params = new URLSearchParams(window.location.hash.slice(1));
-  const g = (params.get("g")||"").toLowerCase(); // m | w | p
+  const g = (params.get("g")||"").toLowerCase();
   if(g==="m"||g==="w"||g==="p") return g;
   return null;
 }
@@ -269,8 +269,23 @@ function setGreeting(){
 
 // --- get name from URL ---
 function getNameFromURL(){
-  const params = new URLSearchParams(window.location.hash.slice(1));
-  const name = params.get("name");
+  // сначала пробуем hash
+  let params = new URLSearchParams(window.location.hash.slice(1));
+  let name = params.get("name");
+
+  // если нет — пробуем query (для Telegram перехода)
+  if(!name){
+    params = new URLSearchParams(window.location.search);
+    name = params.get("name");
+
+    // если нашли в query — переносим в hash (фикс)
+    if(name){
+      const g = params.get("g") || "";
+      window.location.replace(`${window.location.origin}/#name=${encodeURIComponent(name)}${g?`&g=${g}`:""}`);
+      return null; // остановка, будет перезагрузка
+    }
+  }
+
   return name ? decodeURIComponent(name) : null;
 }
 
