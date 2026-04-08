@@ -214,14 +214,47 @@ function getGender(name){
   return "unknown";
 }
 
+function getMode(){
+  const params = new URLSearchParams(window.location.search);
+  const g = (params.get("g")||"").toLowerCase(); // m | w | p
+  if(g==="m"||g==="w"||g==="p") return g;
+  return null;
+}
+
 function setGreeting(){
   const name = window.guestName || null;
   const el = document.getElementById("greeting");
+  const mode = getMode();
 
   if(!name){
+    // без имени — дефолт мужской
     el.innerText = "Дорогой гость!";
     return;
   }
+
+  // нормализуем имя из URL
+  const cleaned = name.replace(/\+/g,' ').trim();
+
+  // приоритет — явный режим из URL
+  if(mode === "p"){
+    el.innerText = `Дорогие ${cleaned}!`;
+    return;
+  }
+  if(mode === "w"){
+    el.innerText = `Дорогая ${cleaned}!`;
+    return;
+  }
+  if(mode === "m"){
+    el.innerText = `Дорогой ${cleaned}!`;
+    return;
+  }
+
+  // fallback: если режим не задан — используем эвристику
+  const gender = getGender(cleaned);
+  if(gender === "female") el.innerText = `Дорогая ${cleaned}!`;
+  else if(gender === "male") el.innerText = `Дорогой ${cleaned}!`;
+  else el.innerText = `Дорогой ${cleaned}!`;
+}
 
   const gender = getGender(name);
 
