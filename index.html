@@ -133,6 +133,10 @@ const w=document.getElementById("wrapper");
 function openInvite(){
   w.classList.add("open");
 
+  // reset scroll to top
+  const s2 = document.querySelector('.screen2');
+  if(s2) s2.scrollTop = 0;
+
   restartLineAnimation();
 
   setTimeout(()=>{
@@ -145,6 +149,9 @@ function openInvite(){
 function closeInvite(){
   w.classList.remove("open");
   document.querySelectorAll(".fade").forEach(el=>el.classList.remove("show"));
+
+  const s2 = document.querySelector('.screen2');
+  if(s2) s2.scrollTop = 0;
 
   restartLineAnimation();
 }
