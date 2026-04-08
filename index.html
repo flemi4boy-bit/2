@@ -79,7 +79,7 @@ body{margin:0;font-family:'Inter',sans-serif;background:#f2ebe3;color:#8f7443;}
 <div class="content">
 <img src="leaf.png" class="decor top-left" alt="">
 <img src="flower.png" class="decor bottom-right" alt="">
-<div class="greeting fade" id="greeting">Дорогой гость!</div>
+<div class="greeting fade" id="greeting"></div>
 <div class="block fade">С большой радостью приглашаем Вас<br>разделить с нами один из самых<br>важных дней в нашей жизни —<br>день, с которого начинается наша<br>семейная история.</div>
 <div class="divider fade"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
 <div class="place fade">Банкетный зал «OQ SAROY»<br>г. Ангрен</div>
@@ -173,6 +173,54 @@ function restartLineAnimation(){
     w.classList.add('animate');
   });
 }
+// --- gender detection (optimized for Uzbek names) ---
+function getGender(name){
+  const n = name.toLowerCase();
+
+  // точечные исключения
+  const maleExceptions = ["асатулло","асатулла","шахзода","абдулла"];
+  const femaleExceptions = ["нилуфар","нилӯфар","зебо"];
+
+  if(maleExceptions.includes(n)) return "male";
+  if(femaleExceptions.includes(n)) return "female";
+
+  // женские паттерны
+  if(
+    n.endsWith("а") ||
+    n.endsWith("я") ||
+    n.endsWith("ноза") ||
+    n.endsWith("гул") ||
+    n.endsWith("хон") ||
+    n.endsWith("ой") ||
+    n.endsWith("бахор") ||
+    n.endsWith("барно") ||
+    n.endsWith("нигора")
+  ) return "female";
+
+  // мужские паттерны
+  if(
+    n.endsWith("бек") ||
+    n.endsWith("жон") ||
+    n.endsWith("мурод") ||
+    n.endsWith("мирзо") ||
+    n.endsWith("дин")
+  ) return "male";
+
+  return "unknown";
+}
+
+function setGreeting(){
+  const name = document.getElementById("n1").innerText;
+  const gender = getGender(name);
+  const el = document.getElementById("greeting");
+
+  if(gender === "female") el.innerText = "Дорогая гостья!";
+  else if(gender === "male") el.innerText = "Дорогой гость!";
+  else el.innerText = "Дорогие гости!";
+}
+
+setGreeting();
+
 </script>
 
 </body>
