@@ -256,13 +256,6 @@ function setGreeting(){
   else el.innerText = `Дорогой ${cleaned}!`;
 }
 
-  const gender = getGender(name);
-
-  if(gender === "female") el.innerText = `Дорогая ${name}!`;
-  else if(gender === "male") el.innerText = `Дорогой ${name}!`;
-  else el.innerText = `Дорогой ${name}!`;
-}
-
 // --- get name from URL ---
 function getNameFromURL(){
   const params = new URLSearchParams(window.location.search);
