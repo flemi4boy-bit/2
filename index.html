@@ -45,27 +45,24 @@ body{
   overflow:hidden;
 }
 
-/* LEAVES (FIXED) */
-.leaf{
+/* SVG LEAVES (premium) */
+.leaf-svg{
   position:absolute;
   width:260px;
-  opacity:.2; /* увеличено для проверки */
   pointer-events:none;
   z-index:0;
 }
 
-.leaf.left{
+.leaf-svg.left{
   left:-60px;
   bottom:-60px;
 }
 
-.leaf.right{
+.leaf-svg.right{
   right:-60px;
   top:-60px;
-  transform:scaleX(-1);
 }
 
-/* чтобы контент был поверх */
 .content > *{
   position:relative;
   z-index:1;
@@ -270,12 +267,28 @@ body{
 
 <div class="wrapper" id="wrapper">
 
-<!-- screen1 -->
+<!-- SCREEN 1 -->
 <div class="screen screen1">
 <div class="content">
 
-<img src="/leaf-left.png" class="leaf left">
-<img src="/leaf-right.png" class="leaf right">
+<!-- SVG ветки -->
+<svg class="leaf-svg left" viewBox="0 0 200 200">
+  <g fill="none" stroke="#b8965a" stroke-width="1.2" opacity="0.15">
+    <path d="M10 180 C60 120, 80 100, 120 40"/>
+    <ellipse cx="60" cy="120" rx="6" ry="12"/>
+    <ellipse cx="90" cy="90" rx="5" ry="10"/>
+    <ellipse cx="110" cy="70" rx="4" ry="9"/>
+  </g>
+</svg>
+
+<svg class="leaf-svg right" viewBox="0 0 200 200">
+  <g fill="none" stroke="#b8965a" stroke-width="1.2" opacity="0.15">
+    <path d="M190 180 C140 120, 120 100, 80 40"/>
+    <ellipse cx="140" cy="120" rx="6" ry="12"/>
+    <ellipse cx="110" cy="90" rx="5" ry="10"/>
+    <ellipse cx="90" cy="70" rx="4" ry="9"/>
+  </g>
+</svg>
 
 <div class="name" id="n1">Руслан</div>
 <div class="amp" id="amp">&</div>
@@ -288,15 +301,32 @@ body{
 <div class="divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
 
 <button class="button" onclick="openInvite()">Открыть приглашение</button>
+
 </div>
 </div>
 
-<!-- screen2 -->
+<!-- SCREEN 2 -->
 <div class="screen screen2">
 <div class="content">
 
-<img src="/leaf-left.png" class="leaf left">
-<img src="/leaf-right.png" class="leaf right">
+<!-- SVG ветки -->
+<svg class="leaf-svg left" viewBox="0 0 200 200">
+  <g fill="none" stroke="#b8965a" stroke-width="1.2" opacity="0.15">
+    <path d="M10 180 C60 120, 80 100, 120 40"/>
+    <ellipse cx="60" cy="120" rx="6" ry="12"/>
+    <ellipse cx="90" cy="90" rx="5" ry="10"/>
+    <ellipse cx="110" cy="70" rx="4" ry="9"/>
+  </g>
+</svg>
+
+<svg class="leaf-svg right" viewBox="0 0 200 200">
+  <g fill="none" stroke="#b8965a" stroke-width="1.2" opacity="0.15">
+    <path d="M190 180 C140 120, 120 100, 80 40"/>
+    <ellipse cx="140" cy="120" rx="6" ry="12"/>
+    <ellipse cx="110" cy="90" rx="5" ry="10"/>
+    <ellipse cx="90" cy="70" rx="4" ry="9"/>
+  </g>
+</svg>
 
 <div class="greeting fade">Дорогой гость!</div>
 
