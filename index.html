@@ -201,7 +201,22 @@ update();
 setInterval(update,1000);
 
 function openYandex(){
-  window.open("https://yandex.uz/maps/?ll=70.074589,40.999666&z=20","_blank");
+  const lat = 40.999666;
+  const lon = 70.074589;
+
+  // universal link (web)
+  const webUrl = `https://yandex.uz/maps/?pt=${lon},${lat}&z=18&l=map`;
+
+  // deep link for app
+  const appUrl = `yandexmaps://maps.yandex.ru/?pt=${lon},${lat}&z=18&l=map`;
+
+  // try open app first
+  window.location.href = appUrl;
+
+  // fallback to web
+  setTimeout(()=>{
+    window.open(webUrl, "_blank");
+  }, 500);
 }
 
 function restartLineAnimation(){
