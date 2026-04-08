@@ -226,7 +226,7 @@ function getGender(name){
 }
 
 function getMode(){
-  const params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(window.location.hash.slice(1));
   const g = (params.get("g")||"").toLowerCase(); // m | w | p
   if(g==="m"||g==="w"||g==="p") return g;
   return null;
