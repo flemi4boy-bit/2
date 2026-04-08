@@ -7,11 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  font-family:'Inter',sans-serif;
-  background:#f2ebe3;
-}
+body{margin:0;font-family:'Inter',sans-serif;background:#f2ebe3;}
 
 .wrapper{height:100vh;overflow:hidden;position:relative;}
 
@@ -22,25 +18,23 @@ body{
   transition:1s;
 }
 
-.screen2{
-  transform:translateY(100%);
-  opacity:0;
-  overflow-y:auto;
-}
-
+.screen2{transform:translateY(100%);opacity:0;overflow-y:auto;}
 .wrapper.open .screen1{transform:translateY(-100%);opacity:0;}
 .wrapper.open .screen2{transform:translateY(0);opacity:1;}
 
 .content{
   width:92%; max-width:420px;
-  padding:40px 24px;
+  padding:42px 26px;
   background:#fbf7f2;
-  border-radius:20px;
-  display:flex; flex-direction:column; gap:20px;
+  border-radius:22px;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
   text-align:center;
 }
 
-/* names */
+/* ===== FIRST SCREEN ===== */
+
 .name{
   font-family:'Great Vibes';
   font-size:64px;
@@ -56,7 +50,6 @@ body{
   font-size:36px;
   color:#b8965a;
   opacity:0;
-  transition:1s;
 }
 .amp.show{opacity:.8;}
 
@@ -66,18 +59,15 @@ body{
   letter-spacing:2px;
   color:#b8965a;
   opacity:0;
-  transform:translateY(10px);
-  animation:fadeUp 1s forwards;
-  animation-delay:.6s;
+  animation:fadeUp 1s forwards .6s;
 }
 
-/* divider */
 .divider{
-  width:200px;
-  margin:6px auto;
+  width:220px;
+  margin:8px auto;
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:10px;
 }
 
 .line{
@@ -91,62 +81,51 @@ body{
   height:4px;
   border-radius:50%;
   background:#b8965a;
-  opacity:.7;
 }
 
-/* button */
+/* ===== BUTTON ===== */
+
 .button{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  padding:10px 22px;
+  padding:12px 26px;
   border-radius:999px;
   border:1px solid #b8965a;
   background:transparent;
   color:#b8965a;
   font-family:'Cormorant Garamond';
-  letter-spacing:1px;
   cursor:pointer;
-  transition:.3s ease;
   text-decoration:none;
+  transition:.3s;
 }
-
-.map .button{margin:0;}
 
 .button:hover{
   transform:translateY(-2px);
   background:rgba(184,150,90,.08);
 }
 
-.section-title{
-  font-family:'Cormorant Garamond';
-  font-size:13px;
-  letter-spacing:3px;
-  color:#b8965a;
+.button.small{
+  min-width:120px;
+  padding:10px 18px;
 }
 
-/* text */
-.greeting{
-  font-family:'Great Vibes';
-  font-size:32px;
-}
+/* ===== SECOND SCREEN ===== */
+
+.greeting{font-family:'Great Vibes';font-size:34px;}
 
 .block{
   font-family:'Great Vibes';
-  font-size:24px;
-  line-height:1.5;
+  font-size:26px;
+  line-height:1.6;
 }
 
-/* STRICT STYLE */
 .place{
   font-family:'Cormorant Garamond';
   font-size:20px;
-  line-height:1.5;
-  letter-spacing:.5px;
-  color:#2b2b2b;
 }
 
-/* ===== TIME BLOCK ===== */
+/* time */
 .time-block{
   position:relative;
   width:260px;
@@ -156,17 +135,14 @@ body{
   gap:14px;
 }
 
-/* vertical line */
 .v-line{
   position:absolute;
   left:50%;
-  top:21px;
+  top:22px;
   bottom:26px;
   transform:translateX(-50%);
   display:flex;
   flex-direction:column;
-  align-items:center;
-  pointer-events:none;
 }
 
 .v-line span{
@@ -175,35 +151,25 @@ body{
   flex:1;
 }
 
-.v-line .gap{
-  height:15px;
-  flex:none;
-}
+.v-line .gap{height:10px;}
 
 .time-row{
   display:flex;
   justify-content:space-between;
   font-family:'Cormorant Garamond';
   font-size:15px;
-  letter-spacing:.5px;
-  color:#555;
+  color:#666;
 }
 
 .time-row.values{
   font-size:22px;
-  letter-spacing:1px;
-  color:#1f1f1f;
+  color:#222;
 }
 
-.time-row.values div{
-  font-weight:500;
-}
-
-/* center line */
 .center-line{
   display:flex;
   align-items:center;
-  gap:15px;
+  gap:12px;
 }
 
 .center-line .half{
@@ -219,18 +185,25 @@ body{
 /* signature */
 .signature{
   font-family:'Great Vibes';
-  font-size:28px;
+  font-size:32px;
 }
 
 /* timer */
+.section-title{
+  font-family:'Cormorant Garamond';
+  font-size:13px;
+  letter-spacing:3px;
+  color:#b8965a;
+}
+
 .timer{
   display:flex;
   justify-content:center;
-  gap:22px;
-  text-align:center;
+  gap:28px;
 }
 
 .timer-block{
+  width:60px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -238,22 +211,21 @@ body{
 
 .timer-value{
   font-family:'Cormorant Garamond';
-  font-size:28px;
+  font-size:30px;
   color:#b8965a;
 }
 
 .timer-label{
-  font-family:'Cormorant Garamond';
   font-size:11px;
   letter-spacing:2px;
   opacity:.7;
 }
 
-/* map */
+/* map FIX */
 .map{
   display:flex;
-  gap:6px;
   justify-content:center;
+  gap:8px;
 }
 
 /* back */
@@ -262,19 +234,16 @@ body{
   font-size:12px;
   letter-spacing:2px;
   color:#b8965a;
-  opacity:.6;
-  border:none;
   background:none;
-  cursor:pointer;
+  border:none;
+  opacity:.6;
 }
 
 /* animations */
 .fade{opacity:0;transform:translateY(20px);transition:.8s;}
 .fade.show{opacity:1;transform:translateY(0);}
 
-@keyframes fadeUp{
-  to{opacity:1;transform:translateY(0);}
-}
+@keyframes fadeUp{to{opacity:1;}}
 </style>
 </head>
 
@@ -282,8 +251,10 @@ body{
 
 <div class="wrapper" id="wrapper">
 
+<!-- SCREEN 1 -->
 <div class="screen screen1">
 <div class="content">
+
 <div class="name" id="n1">Руслан</div>
 <div class="amp" id="amp">&</div>
 <div class="name" id="n2">Эльвина</div>
@@ -295,19 +266,21 @@ body{
 <div class="divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
 
 <button class="button" onclick="openInvite()">Открыть приглашение</button>
+
 </div>
 </div>
 
+<!-- SCREEN 2 -->
 <div class="screen screen2">
 <div class="content">
 
-<div class="greeting fade">Дорогой гость!</div>
+<div class="greeting fade" id="greeting">Дорогой гость!</div>
 
 <div class="block fade">
 С большой радостью приглашаем Вас<br>
 разделить с нами один из самых<br>
-важных дней в нашей жизни — день,<br>
-с которого начинается наша<br>
+важных дней в нашей жизни —
+день, с которого начинается наша
 семейная история.
 </div>
 
@@ -319,59 +292,49 @@ body{
 </div>
 
 <div class="time-block fade">
+<div class="v-line"><span></span><div class="gap"></div><span></span></div>
 
-  <div class="v-line">
-    <span></span>
-    <div class="gap"></div>
-    <span></span>
-  </div>
+<div class="time-row">
+<div>Сбор гостей</div>
+<div>Начало торжества</div>
+</div>
 
-  <div class="time-row">
-    <div>Сбор гостей</div>
-    <div>Начало торжества</div>
-  </div>
+<div class="center-line">
+<div class="half"></div>
+<div class="dot"></div>
+<div class="half right"></div>
+</div>
 
-  <div class="center-line">
-    <div class="half"></div>
-    <div class="dot"></div>
-    <div class="half right"></div>
-  </div>
-
-  <div class="time-row values">
-    <div>17:30</div>
-    <div>18:00</div>
-  </div>
-
+<div class="time-row values">
+<div>17:30</div>
+<div>18:00</div>
+</div>
 </div>
 
 <div class="divider fade"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
 
 <div class="signature fade">С любовью,<br>Руслан и Эльвина</div>
 
-<div class="divider fade"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
-
 <div class="section-title fade">До события осталось</div>
 
 <div class="timer fade">
-  <div class="timer-block">
-    <div class="timer-value" id="days">0</div>
-    <div class="timer-label">дни</div>
-  </div>
-  <div class="timer-block">
-    <div class="timer-value" id="hours">00</div>
-    <div class="timer-label">часы</div>
-  </div>
-  <div class="timer-block">
-    <div class="timer-value" id="minutes">00</div>
-    <div class="timer-label">минуты</div>
-  </div>
+<div class="timer-block">
+<div class="timer-value" id="days">0</div>
+<div class="timer-label">дни</div>
+</div>
+<div class="timer-block">
+<div class="timer-value" id="hours">00</div>
+<div class="timer-label">часы</div>
+</div>
+<div class="timer-block">
+<div class="timer-value" id="minutes">00</div>
+<div class="timer-label">минуты</div>
+</div>
 </div>
 
-<div class="section-title fade">Локация</div>
-
 <div class="map fade">
-<a class="button" href="#" onclick="openYandex()">Яндекс</a>
-<a class="button" href="https://www.google.com/maps/place/40.9994792,70.0747963" target="_blank">Google</a>
+<a class="button small" onclick="openYandex()">Яндекс</a>
+<a class="button small" href="https://www.google.com/maps/place/40.9994792,70.0747963">Google</a>
 </div>
 
 <button class="back fade" onclick="closeInvite()">назад</button>
@@ -404,15 +367,16 @@ setTimeout(()=>{
   setTimeout(()=>amp.classList.add("show"),400);
 },200);
 
+/* timer */
 const target=new Date("2026-04-26T17:30:00").getTime();
 
 function update(){
   let d=target-Date.now();
   if(d<=0)return;
 
-  document.getElementById("days").innerText=Math.floor(d/86400000);
-  document.getElementById("hours").innerText=String(Math.floor(d%86400000/3600000)).padStart(2,'0');
-  document.getElementById("minutes").innerText=String(Math.floor(d%3600000/60000)).padStart(2,'0');
+  days.innerText=Math.floor(d/86400000);
+  hours.innerText=String(Math.floor(d%86400000/3600000)).padStart(2,'0');
+  minutes.innerText=String(Math.floor(d%3600000/60000)).padStart(2,'0');
 }
 
 update();
