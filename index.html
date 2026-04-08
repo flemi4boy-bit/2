@@ -7,69 +7,62 @@
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;500;600&family=Cormorant+Infant:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-body{margin:0;font-family:'Inter',sans-serif;background:#f2ebe3;color:#8f7443;scroll-behavior:smooth;}
+body{margin:0;font-family:'Inter',sans-serif;background:#f2ebe3;color:#8f7443;}
 .wrapper{height:100vh;overflow:hidden;position:relative;}
-.screen{position:absolute; inset:0;display:flex; justify-content:center; align-items:flex-start;padding-top:60px;transition:1s cubic-bezier(.4,0,.2,1);}
-.screen2{transform:translateY(100%);opacity:0;overflow-y:auto;scroll-behavior:smooth;}
+.screen{position:absolute; inset:0;display:flex; justify-content:center; align-items:flex-start;padding-top:60px;transition:1s cubic-bezier(.4,0,.2,1);will-change:transform, opacity;transform:translateZ(0);}
+.screen2{transform:translateY(100%);opacity:0;overflow-y:auto;-webkit-overflow-scrolling:touch;}
 .wrapper.open .screen1{transform:translateY(-100%);opacity:0;}
 .wrapper.open .screen2{transform:translateY(0);opacity:1;}
 .content{width:92%; max-width:420px;padding:42px 26px;background:#fbf7f2;border-radius:22px;display:flex; flex-direction:column; gap:24px;text-align:center;}
 .screen2 .content{gap:12px;padding:32px 22px;}
-
-.name{font-family:'Great Vibes';font-size:72px;color:#8f7443;opacity:0;transform:translateY(20px);transition:1s;}
-.name.show{opacity:1;transform:translateY(0);}
-.amp{font-family:'Great Vibes';font-size:36px;color:#8f7443;opacity:0;}
+.name{font-family:'Great Vibes';font-size:72px;color:#8f7443;opacity:0;transform:translateY(20px) translateZ(0);transition:1s;will-change:transform,opacity;}
+.name.show{opacity:1;transform:translateY(0) translateZ(0);}
+.amp{font-family:'Great Vibes';font-size:36px;color:#8f7443;opacity:0;transition:.6s;}
 .amp.show{opacity:.8;}
-
 .date{font-family:'Cormorant Garamond';font-size:26px;letter-spacing:2px;color:#8f7443;opacity:0;animation:fadeUp 1s forwards .6s;}
-
 .divider{width:220px;margin:6px auto;display:flex;align-items:center;gap:10px;}
-.line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(143,116,67,.35),transparent);transform:scaleX(0);transform-origin:center;}
+.line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(143,116,67,.35),transparent);transform:scaleX(0);transform-origin:center;will-change:transform;}
 .dot{width:3px;height:3px;border-radius:50%;background:#8f7443;opacity:.7;}
-
 .button{display:inline-flex;align-items:center;justify-content:center;padding:10px 20px;border-radius:999px;border:1px solid #8f7443;background:transparent;color:#8f7443;font-family:'Cormorant Garamond';cursor:pointer;text-decoration:none;transition:background .4s ease, box-shadow .4s ease;align-self:center;box-shadow: inset 0 0 6px rgba(143,116,67,.1);}
 .button:hover{background:rgba(143,116,67,.06);box-shadow:0 0 10px rgba(143,116,67,.2), inset 0 0 8px rgba(143,116,67,.15);} 
 .button.small{min-width:auto;padding:8px 14px;font-size:13px;border-width:1px;}
-
 .greeting{font-family:'Great Vibes';font-size:34px;}
 .block{font-family:'Great Vibes';font-size:26px;line-height:1.35;margin-bottom:-4px;}
 .place{font-family:'Cormorant Infant', serif;font-size:22px;font-style:italic;}
-
 .time-block{width:260px;margin:0 auto;display:flex;flex-direction:column;gap:4px;}
 .time-row{display:flex;justify-content:space-between;font-family:'Cormorant Infant', serif;font-size:16px;font-style:italic;margin:0;}
 .time-row.values{font-size:22px;font-weight:500;}
 .center-line{width:220px;margin:2px auto;display:flex;align-items:center;gap:10px;}
-.center-line .half{flex:1;height:1px;background:rgba(143,116,67,.3);transform:scaleX(0);}
-.center-line .half.right{transform:scaleX(0);}
-
+.center-line .half{flex:1;height:1px;background:rgba(143,116,67,.3);transform:scaleX(0);will-change:transform;}
 .signature{font-family:'Great Vibes';font-size:32px;margin:4px 0;}
 .section-title{font-family:'Cormorant Garamond';font-size:15px;letter-spacing:3px;margin-bottom:-6px;}
-
 .timer{display:flex;justify-content:center;gap:28px;}
 .timer-block{width:60px;display:flex;flex-direction:column;align-items:center;}
 .timer-value{font-family:'Cormorant Garamond';font-size:30px;}
 .timer-label{font-size:11px;letter-spacing:2px;}
-
 .map{display:flex;justify-content:center;gap:8px;}
 .back{font-family:'Cormorant Garamond';font-size:12px;letter-spacing:2px;background:none;border:none;color:#8f7443;}
-
-.fade{opacity:0;transform:translateY(20px);transition:.8s;}
-.fade.show{opacity:1;transform:translateY(0);}
-
+.fade{opacity:0;transform:translateY(20px) translateZ(0);transition:.6s ease;will-change:transform,opacity;}
+.fade.show{opacity:1;transform:translateY(0) translateZ(0);}
 @keyframes lineIn{to{transform:scaleX(1);}}
 .animate .line{animation:lineIn .8s ease forwards .2s;}
 .animate .center-line .half{animation:lineIn .8s ease forwards .3s;}
-.fade.show .line{animation:lineIn .8s ease forwards .2s;}
-.fade.show .center-line .half{animation:lineIn .8s ease forwards .3s;}
-
 @keyframes fadeUp{to{opacity:1;}}
+.content{position:relative;}
+.decor{position:absolute;pointer-events:none;z-index:0;opacity:.4;filter:grayscale(25%) saturate(80%);}  
+/* привязка строго к углам карточки */
+.decor.top-left{top:0;left:0;width:260px;transform:translate(0%,0%) rotate(-6deg);}      
+.decor.bottom-right{bottom:0;right:0;width:260px;transform:translate(-4%,-4%) rotate(180deg);}
 </style>
 </head>
 <body>
+
 <div class="wrapper" id="wrapper">
 
 <div class="screen screen1">
 <div class="content">
+<img src="leaf.png" class="decor top-left" alt="">
+<img src="leaf.png" class="decor bottom-right" alt="">
 <div class="name" id="n1">Руслан</div>
 <div class="amp" id="amp">&</div>
 <div class="name" id="n2">Эльвина</div>
@@ -84,44 +77,32 @@ body{margin:0;font-family:'Inter',sans-serif;background:#f2ebe3;color:#8f7443;sc
 
 <div class="screen screen2">
 <div class="content">
-
+<img src="leaf.png" class="decor top-left" alt="">
+<img src="leaf.png" class="decor bottom-right" alt="">
 <div class="greeting fade" id="greeting">Дорогой гость!</div>
-
 <div class="block fade">С большой радостью приглашаем Вас<br>разделить с нами один из самых<br>важных дней в нашей жизни —<br>день, с которого начинается наша<br>семейная история.</div>
-
 <div class="divider fade"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
-
 <div class="place fade">Банкетный зал «OQ SAROY»<br>г. Ангрен</div>
-
 <div class="time-block fade">
 <div class="time-row"><div>Сбор гостей</div><div>Начало торжества</div></div>
 <div class="center-line"><div class="half"></div><div class="dot"></div><div class="half right"></div></div>
 <div class="time-row values"><div>17:30</div><div>18:00</div></div>
 </div>
-
 <div class="divider fade"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
-
 <div class="signature fade">С любовью,<br>Руслан и Эльвина</div>
-
 <div class="divider fade"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
-
 <div class="section-title fade">До события осталось</div>
-
 <div class="timer fade">
 <div class="timer-block"><div class="timer-value" id="days">0</div><div class="timer-label">дни</div></div>
 <div class="timer-block"><div class="timer-value" id="hours">00</div><div class="timer-label">часы</div></div>
 <div class="timer-block"><div class="timer-value" id="minutes">00</div><div class="timer-label">минуты</div></div>
 </div>
-
 <div class="section-title fade">Локация</div>
-
 <div class="map fade">
 <a class="button small" onclick="openYandex()">Яндекс</a>
-<a class="button small" href="https://www.google.com/maps/place/40.9994792,70.0747963">Google</a>
+<a class="button small" href="https://www.google.com/maps?q=40.9994792,70.0747963" target="_blank">Google</a>
 </div>
-
 <button class="back fade" onclick="closeInvite()">назад</button>
-
 </div>
 </div>
 
@@ -129,110 +110,68 @@ body{margin:0;font-family:'Inter',sans-serif;background:#f2ebe3;color:#8f7443;sc
 
 <script>
 const w=document.getElementById("wrapper");
-
-function openInvite(){
-  w.classList.add("open");
-
-  // reset scroll to top
-  const s2 = document.querySelector('.screen2');
-  if(s2) s2.scrollTo({ top: 0, behavior: 'smooth' });
-
-  restartLineAnimation();
-
-  setTimeout(()=>{
-    document.querySelectorAll(".fade").forEach((el,i)=>{
-      setTimeout(()=>el.classList.add("show"),i*120);
+const fades=document.querySelectorAll('.fade');
+function runFadeSequence(){
+  fades.forEach(el=>el.classList.remove('show'));
+  requestAnimationFrame(()=>{
+    fades.forEach((el,i)=>{
+      el.style.transitionDelay = (i*80)+'ms';
+      el.classList.add('show');
     });
-  },300);
+  });
 }
-
+function resetScroll(){
+  const s2 = document.querySelector('.screen2');
+  if(s2) s2.scrollTop = 0;
+}
+function openInvite(){
+  resetScroll();
+  w.classList.add("open");
+  requestAnimationFrame(()=>{
+    restartLineAnimation();
+    runFadeSequence();
+  });
+}
 function closeInvite(){
   w.classList.remove("open");
-  document.querySelectorAll(".fade").forEach(el=>el.classList.remove("show"));
-
-  const s2 = document.querySelector('.screen2');
-  if(s2) s2.scrollTo({ top: 0, behavior: 'smooth' });
-
+  fades.forEach(el=>{
+    el.classList.remove('show');
+    el.style.transitionDelay = '0ms';
+  });
+  resetScroll();
   restartLineAnimation();
 }
-
 setTimeout(()=>{
   n1.classList.add("show");
   n2.classList.add("show");
-  setTimeout(()=>amp.classList.add("show"),400);
-
+  requestAnimationFrame(()=>amp.classList.add("show"));
   restartLineAnimation();
 },200);
-
-function normalizeName(name){
-  name=name.trim().toLowerCase();
-  return name.charAt(0).toUpperCase()+name.slice(1);
-}
-
-const params=new URLSearchParams(location.search);
-let raw=params.get("name");
-
-if(raw){
-  raw=decodeURIComponent(raw);
-  const names=raw.split(",").map(n=>normalizeName(n)).filter(Boolean);
-
-  if(names.length>1){
-    greeting.innerText="Дорогие "+names.join(" и ")+"!";
-  }else{
-    const n=names[0];
-    greeting.innerText=["а","я"].includes(n.slice(-1).toLowerCase())
-      ?"Дорогая "+n+"!"
-      :"Дорогой "+n+"!";
-  }
-}
-
 const target=new Date("2026-04-26T17:30:00").getTime();
-
 function update(){
   let d=target-Date.now();
   if(d<=0)return;
-
   days.innerText=Math.floor(d/86400000);
   hours.innerText=String(Math.floor(d%86400000/3600000)).padStart(2,'0');
   minutes.innerText=String(Math.floor(d%3600000/60000)).padStart(2,'0');
 }
-
 update();
 setInterval(update,1000);
-
 function openYandex(){
   const lat = 40.999666;
   const lon = 70.074589;
-
-  // universal link (web)
   const webUrl = `https://yandex.uz/maps/?pt=${lon},${lat}&z=18&l=map`;
-
-  // deep link for app
   const appUrl = `yandexmaps://maps.yandex.ru/?pt=${lon},${lat}&z=18&l=map`;
-
-  // try open app first
   window.location.href = appUrl;
-
-  // fallback to web
   setTimeout(()=>{
     window.open(webUrl, "_blank");
   }, 500);
 }
-
 function restartLineAnimation(){
   w.classList.remove('animate');
-
-  document.querySelectorAll('.line, .center-line .half').forEach(el=>{
-    el.style.animation='none';
+  requestAnimationFrame(()=>{
+    w.classList.add('animate');
   });
-
-  void w.offsetWidth;
-
-  document.querySelectorAll('.line, .center-line .half').forEach(el=>{
-    el.style.animation='';
-  });
-
-  w.classList.add('animate');
 }
 </script>
 
