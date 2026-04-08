@@ -219,6 +219,21 @@ function setGreeting(){
   else el.innerText = "Дорогие гости!";
 }
 
+// --- get name from URL ---
+function getNameFromURL(){
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get("name");
+  return name ? decodeURIComponent(name) : null;
+}
+
+function initName(){
+  const urlName = getNameFromURL();
+  if(urlName){
+    document.getElementById("n1").innerText = urlName;
+  }
+}
+
+initName();
 setGreeting();
 
 </script>
