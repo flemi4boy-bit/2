@@ -179,7 +179,12 @@ function getGender(name){
 
   // точечные исключения
   const maleExceptions = ["асатулло","асатулла","шахзода","абдулла"];
-  const femaleExceptions = ["нилуфар","нилӯфар","зебо"];
+  const femaleExceptions = [
+  "нилуфар","нилӯфар","зебо","севинч","севинчхон",
+  "мехриноз","феруза","дилноза","гульноза","шахноза",
+  "мадина","ситора","нозима","барно","нигора","бахора",
+  "гули","гулинора","замира","лола","сабина","айгуль"
+];
 
   if(maleExceptions.includes(n)) return "male";
   if(femaleExceptions.includes(n)) return "female";
@@ -214,7 +219,7 @@ function setGreeting(){
   const el = document.getElementById("greeting");
 
   if(!name){
-    el.innerText = "Дорогие гости!";
+    el.innerText = "Дорогой гость!";
     return;
   }
 
@@ -222,7 +227,7 @@ function setGreeting(){
 
   if(gender === "female") el.innerText = `Дорогая ${name}!`;
   else if(gender === "male") el.innerText = `Дорогой ${name}!`;
-  else el.innerText = `Дорогие ${name}!`;
+  else el.innerText = `Дорогой ${name}!`;
 }
 
 // --- get name from URL ---
