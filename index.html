@@ -244,7 +244,7 @@ function setGreeting(){
   }
 
   // нормализуем имя из URL
-  const cleaned = name.replace(/\+/g,' ').trim();
+  const cleaned = name.replace(/\+/g,' ').replace(/=+$/,'').trim();
 
   // приоритет — явный режим из URL
   if(mode === "p"){
